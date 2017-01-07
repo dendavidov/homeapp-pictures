@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const getPath = (pathString) => {
-  return path.resolve(__dirname, `../${pathString}`)
+  return path.resolve(`../${pathString}`)
 };
 
 const config = {
