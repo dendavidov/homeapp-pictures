@@ -1,0 +1,16 @@
+{
+  "name": "learn_koa-react-full",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://DenDavidov@bitbucket.org/dendavidovteam/learn_koa-react-full.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/dendavidovteam/learn_koa-react-full#readme"
+}
