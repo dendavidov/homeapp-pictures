@@ -1,10 +1,11 @@
 {
   "name": "learn_koa-react-full",
   "version": "0.0.1",
-  "description": "",
+  "description": "Learning application for full-stack JS application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "cd tools && sh clean.sh",
+    "front-server": "cd tools && sh prepare-front.sh"
   },
   "repository": {
     "type": "git",
@@ -12,5 +13,38 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/dendavidovteam/learn_koa-react-full#readme"
+  "homepage": "https://bitbucket.org/dendavidovteam/learn_koa-react-full#readme",
+  "dependencies": {
+    "koa": "^1.2.4",
+    "log4js": "^1.1.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "eslint": "^3.13.0",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.8.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "favicons-webpack-plugin": "0.0.7",
+    "html-webpack-plugin": "^2.26.0",
+    "koa-static": "^2.0.0",
+    "koa-webpack-dev-middleware": "^1.3.0",
+    "koa-webpack-hot-middleware": "^1.0.3",
+    "node-sass": "^4.1.1",
+    "nodemon": "^1.11.0",
+    "resolve-url": "^0.2.1",
+    "resolve-url-loader": "^1.6.1",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0"
+  }
 }
