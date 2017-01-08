@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const koa = require('koa');
+const passport = require('koa-passport');
 const fs = require('fs');
 
 const logger = require('./logger');
 
 // 1. config
-const config = require('./config');
+const config = require('./config/config');
 
 // 2. connect to database
 mongoose.connect(config.mongo.url);
@@ -23,6 +24,8 @@ fs.readdirSync(modelPath).forEach((file) => {
 
 // 4. server
 const app = module.exports = koa();
+require('./config/passport')(passport, config);
+require('./config/koa')(app, config, passport);
 
 // 5. routes
 
