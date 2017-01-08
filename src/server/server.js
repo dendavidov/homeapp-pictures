@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const koa = require('koa');
+const fs = require('fs');
 
 const logger = require('./logger');
 
@@ -13,6 +14,12 @@ mongoose.connection.on('error', (err) => {
 });
 
 // 3. load the models
+const modelPath = `${config.app.root}/src/server/models`;
+fs.readdirSync(modelPath).forEach((file) => {
+  if (~file.indexOf('js')) {
+    require(`${modelPath}/${file}`);
+  }
+});
 
 // 4. server
 const app = module.exports = koa();

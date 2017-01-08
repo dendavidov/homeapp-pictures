@@ -16,6 +16,8 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/dendavidovteam/learn_koa-react-full#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
+    "co": "^4.6.0",
     "koa": "^1.2.4",
     "lodash": "^4.17.4",
     "log4js": "^1.1.0",

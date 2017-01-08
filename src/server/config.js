@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const base = {
   app: {
-    root: path.normalize(__dirname, '/../..'),
+    root: path.normalize(`${__dirname}/../..`),
     env: env,
   }
 };
