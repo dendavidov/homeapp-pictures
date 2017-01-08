@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "clean": "cd tools && sh clean.sh",
-    "front-server": "cd tools && sh prepare-front.sh"
+    "front-server": "cd tools && sh prepare-front.sh",
+    "back-server": "cd tools && sh back-server.sh"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,9 @@
   "homepage": "https://bitbucket.org/dendavidovteam/learn_koa-react-full#readme",
   "dependencies": {
     "koa": "^1.2.4",
+    "lodash": "^4.17.4",
     "log4js": "^1.1.0",
+    "mongoose": "^4.7.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
