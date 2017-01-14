@@ -18,12 +18,12 @@ const config = {
     extensions: ['', '.js', '.jsx'],
   },
   module: {
-    preloaders: [
+    preLoaders: [
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
         exclude: /(node_modules|src\/server)/,
-      }
+      },
     ],
     loaders: [
       {
@@ -57,7 +57,7 @@ const config = {
       template: getPath('src/client/index.template.html'),
       minify: {
         collapseWhitespace: true,
-      }
+      },
     }),
     new FaviconsWebpackPlugin({
       logo: getPath('assets/favicon.png'),
@@ -71,9 +71,9 @@ const config = {
         opengraph: false,
         twitter: false,
         yandex: false,
-        windows: false
-      }
-    })
+        windows: false,
+      },
+    }),
   ],
   eslint: {
     configFile: '.eslintrc',
