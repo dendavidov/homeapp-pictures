@@ -7,13 +7,13 @@ module.exports = (app, config, passport) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(function* (next) {
-    this.render = views(`${config.app.root}/src/server/views`, {
-      map: { html: 'swig' },
-      cache: config.app.env === 'development' ? 'memory' : false,
-    });
-    yield next;
-  });
+  // app.use(function* (next) {
+  //   this.render = views(`${config.app.root}/src/server/views`, {
+  //     map: { html: 'swig' },
+  //     cache: config.app.env === 'development' ? 'memory' : false,
+  //   });
+  //   yield next;
+  // });
 
   app.use(compress());
   app.use(responseTime());

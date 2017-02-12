@@ -33,6 +33,7 @@ const config = {
         query: {
           presets: ['es2015', 'react'],
           cacheDirectory: true,
+          plugins: ['transform-class-properties'],
         },
       },
       {

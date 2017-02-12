@@ -1,11 +1,45 @@
 import React from 'react';
 
-function Application(props) {
-  return (
-    <div>
-      {props.children}
-    </div>
-  );
+import Navbar from '../components/navbar';
+import AuthStore from '../stores/auth';
+
+class Application extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasLoaded: false,
+    };
+  }
+
+  componentWillMount() {
+    AuthStore.init();
+  }
+
+  componentDidMount() {
+    AuthStore.addChangeListener(this.onLoad);
+  }
+
+  componentWillUnmount() {
+    AuthStore.removeChangeListener(this.onLoad);
+  }
+
+  onLoad = () => {
+    AuthStore.removeChangeListener(this.onLoad);
+    this.setState({
+      hasLoaded: true,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <div className="transition-crop main-container">
+          {this.props.children}
+        </div>
+      </div>
+    );
+  }
 }
 
 Application.propTypes = {

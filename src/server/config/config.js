@@ -16,7 +16,7 @@ const config = {
   },
   mongo: {
     url: "mongodb://localhost/koareactfullexample_dev",
-  }
+  },
 };
 
 module.exports = _.merge(base, config);
