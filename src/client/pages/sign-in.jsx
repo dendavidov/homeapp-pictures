@@ -87,9 +87,11 @@ class SignIn extends React.Component {
             </form>
           </Col>
         </Row>
-        <Col md={6} mdOffset={3}>
-          <p>Don&apos;t have an account? You can <Link to="sign-up">sign up</Link></p>
-        </Col>
+        <Row>
+          <Col md={6} mdOffset={3}>
+            <p>Don&apos;t have an account? You can <Link to="sign-up">sign up</Link></p>
+          </Col>
+        </Row>
       </div>
     );
   }
