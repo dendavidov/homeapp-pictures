@@ -3,6 +3,8 @@ import React from 'react';
 import Navbar from '../components/navbar';
 import AuthStore from '../stores/auth';
 
+import '../sass/main.sass';
+
 class Application extends React.Component {
   constructor(props) {
     super(props);
