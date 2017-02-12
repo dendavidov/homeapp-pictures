@@ -37,13 +37,15 @@ class SignUp extends React.Component {
       AuthStore.signUp(username, password, (err, user) => {
         if (err || !user) {
           this.setState({ error: 'Could not Create the User' });
+        } else {
+          this.context.router.replace('/');
         }
       });
     }
   };
 
   renderErrorBlock() {
-    return this.state.error ? (<p className="help-block">this.state.error</p>) : null;
+    return this.state.error ? (<p className="help-block">{this.state.error}</p>) : null;
   }
 
   render() {
@@ -93,5 +95,9 @@ class SignUp extends React.Component {
     );
   }
 }
+
+SignUp.contextTypes = {
+  router: React.PropTypes.shape(),
+};
 
 export default SignUp;

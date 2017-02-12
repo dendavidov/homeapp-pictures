@@ -32,6 +32,8 @@ class SignIn extends React.Component {
     AuthStore.signIn(username, password, (err, user) => {
       if (err || !user) {
         this.setState({ error: true });
+      } else {
+        this.context.router.replace('/');
       }
     });
   };
