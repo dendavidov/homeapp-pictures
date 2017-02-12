@@ -1,15 +1,14 @@
-"use strict";
-var Router = require("koa-router");
+const Router = require('koa-router');
 
-var authController = require("../controllers/authController");
+const authController = require('../controllers/authController');
 
-var secured = function *(next) {
+function* secured(next) {
   if (this.isAuthenticated()) {
     yield next;
   } else {
     this.status = 401;
   }
-};
+}
 
 module.exports = function(app, passport) {
   // register functions

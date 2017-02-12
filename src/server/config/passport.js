@@ -10,9 +10,8 @@ const deserialize = (id, done) => {
   User.findById(id, done);
 };
 
-module.exports = (passport, config) => {
+module.exports = (passport) => {
   passport.serializeUser(serialize);
   passport.deserializeUser(deserialize);
   passport.use(new LocalStrategy(authenticator.localUser));
 };
-

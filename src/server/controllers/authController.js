@@ -2,16 +2,16 @@ const passport = require('koa-passport');
 const User = require('mongoose').model('User');
 
 exports.signIn = function* () {
-  const _this = this;
+  const that = this;
   yield* passport.authenticate('local', function* (err, user) {
     if (err) {
       throw err;
     }
     if (user === false) {
-      _this.status = 401;
+      that.status = 401;
     } else {
-      yield _this.login(user);
-      _this.body = { user };
+      yield that.login(user);
+      that.body = { user };
     }
   }).call(this);
 };

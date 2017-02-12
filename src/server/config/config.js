@@ -6,8 +6,8 @@ const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const base = {
   app: {
     root: path.normalize(`${__dirname}/../../..`),
-    env: env,
-  }
+    env,
+  },
 };
 
 const config = {
@@ -15,7 +15,7 @@ const config = {
     port: 3000,
   },
   mongo: {
-    url: "mongodb://localhost/koareactfullexample_dev",
+    url: 'mongodb://localhost/koareactfullexample_dev',
   },
 };
 
