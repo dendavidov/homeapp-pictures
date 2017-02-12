@@ -89,7 +89,7 @@ class SignIn extends React.Component {
         </Row>
         <Row>
           <Col md={6} mdOffset={3}>
-            <p>Don&apos;t have an account? You can <Link to="sign-up">sign up</Link></p>
+            <p>Don&apos;t have an account? You can <Link to="auth/signup">sign up</Link></p>
           </Col>
         </Row>
       </div>

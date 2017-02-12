@@ -7,6 +7,7 @@ import AnonymousLayout from './layouts/anonymous';
 import AuthenticatedLayout from './layouts/authenticated';
 import SignIn from './pages/sign-in';
 import SignOut from './pages/sign-out';
+import SignUp from './pages/sign-up';
 import IndexPage from './pages/index-page';
 import NotFound from './pages/notfound';
 
@@ -14,6 +15,7 @@ const router = (<Router history={hashHistory}>
   <Route component={Application}>
     <Route path="/auth" component={AnonymousLayout}>
       <Route path="signin" component={SignIn} />
+      <Route path="signup" component={SignUp} />
       <Route path="signout" component={SignOut} />
     </Route>
     <Route path="/" component={AuthenticatedLayout}>

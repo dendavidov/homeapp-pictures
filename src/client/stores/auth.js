@@ -6,6 +6,7 @@ let changeListeners = [];
 
 const URLS = {
   AUTH: 'auth',
+  SIGN_UP: 'signup',
   SIGN_OUT: 'signout',
 };
 
@@ -57,6 +58,9 @@ const AuthStore = {
   },
   signIn: (username, password, done) => {
     postAndHandleParseUser(getUrl(URLS.AUTH), username, password, done);
+  },
+  signUp: (username, password, done) => {
+    postAndHandleParseUser(getUrl(URLS.SIGN_UP), username, password, done);
   },
   signOut: (done) => {
     currentUser = null;
