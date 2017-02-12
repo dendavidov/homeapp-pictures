@@ -1,18 +1,14 @@
 import React from 'react';
+import AuthStore from '../stores/auth';
 
-function SignOut(props) {
-  return (
-    <div className="signout">
-      {props.children}
-    </div>
-  );
+class SignOut extends React.Component {
+  componentWillMount() {
+    AuthStore.signOut();
+  }
+
+  render() {
+    return null;
+  }
 }
-
-SignOut.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.arrayOf(React.PropTypes.node),
-    React.PropTypes.node,
-  ]),
-};
 
 export default SignOut;
