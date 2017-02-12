@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const co = require('co');
+
 const bcrypt = require('../lib/bcrypt-thunk');
-// mongoose.Promise = global.Promise;
+
+const Schema = mongoose.Schema;
+
+mongoose.Promise = global.Promise;
 
 const UserSchema = new Schema({
   username: {
