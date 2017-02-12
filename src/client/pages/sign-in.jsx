@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Col, FormControl, Button, Row } from 'react-bootstrap';
+import { Col, FormControl, FormGroup, Button, Row } from 'react-bootstrap';
 import AuthStore from '../stores/auth';
 
 class SignIn extends React.Component {
@@ -58,20 +58,24 @@ class SignIn extends React.Component {
           </Col>
           <Col md={4}>
             <form onSubmit={this.handleSubmit} className={this.state.error ? 'has-error' : null}>
-              <FormControl
-                id="username"
-                type="text"
-                label="username"
-                placeholder="username"
-                onChange={this.setUsername}
-              />
-              <FormControl
-                id="password"
-                type="password"
-                label="password"
-                placeholder="password"
-                onChange={this.setPassword}
-              />
+              <FormGroup>
+                <FormControl
+                  id="username"
+                  type="text"
+                  label="username"
+                  placeholder="username"
+                  onChange={this.setUsername}
+                />
+              </FormGroup>
+              <FormGroup>
+                <FormControl
+                  id="password"
+                  type="password"
+                  label="password"
+                  placeholder="password"
+                  onChange={this.setPassword}
+                />
+              </FormGroup>
               <Button
                 type="submit"
                 bsStyle="success"
