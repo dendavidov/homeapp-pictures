@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const config = require('./config');
 
 const authController = require('../controllers/authController');
+const indexController = require('../controllers/indexController');
 
 // function* secured(next) {
 //   if (this.isAuthenticated()) {
@@ -21,6 +22,8 @@ module.exports = function routes(app) {
     this.type = 'json';
     yield next;
   });
+
+  router.get(`${apiPrefix}/`, indexController.getIndexPage);
 
   router.get(`${apiPrefix}/auth`, authController.getCurrentUser);
   router.post(`${apiPrefix}/auth`, authController.signIn);

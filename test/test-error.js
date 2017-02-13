@@ -6,6 +6,6 @@ describe('Errors', () => {
     request.get('/urlThatDoesNotExist')
       .accept('json')
       .expect(404)
-      .end(done());
+      .end(done);
   });
 });
