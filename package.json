@@ -8,8 +8,9 @@
     "front-server": "cd tools && sh prepare-front.sh",
     "back-server": "cd tools && sh back-server.sh",
     "dev-server": "cd tools && concurrently --kill-others \"sh prepare-front.sh\" \"sh back-server.sh\"",
-    "test": "npm run lint && npm run base-test",
-    "base-test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/test-*.js",
+    "test": "npm run lint && npm run server-test && npm run client-test",
+    "client-test": "jest",
+    "server-test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/server/test-*.js",
     "lint": "eslint -c ./tools/.eslintrc src test ./tools/webpack.config.js --ext .jsx --ext .js"
   },
   "repository": {
@@ -49,6 +50,7 @@
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.22.0",
     "concurrently": "^3.3.0",
     "css-loader": "^0.26.1",
     "eslint": "^3.15.0",
@@ -61,12 +63,14 @@
     "favicons-webpack-plugin": "0.0.7",
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.26.0",
+    "jest": "^18.1.0",
     "koa-static": "^2.0.0",
     "koa-webpack-dev-middleware": "^1.3.0",
     "koa-webpack-hot-middleware": "^1.0.3",
     "mocha": "^3.2.0",
     "node-sass": "^4.1.1",
     "nodemon": "^1.11.0",
+    "react-test-renderer": "^15.4.2",
     "resolve-url": "^0.2.1",
     "resolve-url-loader": "^1.6.1",
     "sass-loader": "^4.1.1",
@@ -75,5 +79,10 @@
     "supertest": "^3.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0"
+  },
+  "jest": {
+    "testPathDirs": [
+      "./test/client"
+    ]
   }
 }

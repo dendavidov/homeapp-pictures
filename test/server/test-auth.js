@@ -1,6 +1,6 @@
 const should = require('should');
 // const co = require('co');
-const app = require('../src/server/server');
+const app = require('../../src/server/server');
 const request = require('supertest').agent(app.listen());
 const databaseHelper = require('./helpers/database');
 const authHelper = require('./helpers/authenticator');
