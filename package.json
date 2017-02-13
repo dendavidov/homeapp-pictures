@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "cd tools && sh clean.sh",
     "front-server": "cd tools && sh prepare-front.sh",
-    "back-server": "cd tools && sh back-server.sh"
+    "back-server": "cd tools && sh back-server.sh",
+    "dev-server": "cd tools && concurrently --kill-others \"sh prepare-front.sh\" \"sh back-server.sh\""
   },
   "repository": {
     "type": "git",
@@ -45,6 +46,7 @@
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "concurrently": "^3.3.0",
     "css-loader": "^0.26.1",
     "eslint": "^3.13.0",
     "eslint-config-airbnb": "^13.0.0",
