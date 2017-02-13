@@ -10,7 +10,7 @@ const URLS = {
   SIGN_OUT: 'signout',
 };
 
-const getUrl = url => `http://localhost:3000/${url}`;
+const getUrl = url => `http://localhost:3000/api/v1/${url}`;
 
 function parseUser(user) {
   return {

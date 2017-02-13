@@ -1,4 +1,5 @@
 const Router = require('koa-router');
+const config = require('./config');
 
 const authController = require('../controllers/authController');
 
@@ -11,6 +12,8 @@ function* secured(next) {
 }
 
 module.exports = function routes(app) {
+  const apiPrefix = config.app.apiPrefix;
+  console.log('apiPrefix', apiPrefix);
   // register functions
   const router = new Router();
 
@@ -19,11 +22,11 @@ module.exports = function routes(app) {
     yield next;
   });
 
-  router.get('/auth', authController.getCurrentUser);
-  router.post('/auth', authController.signIn);
+  router.get(`${apiPrefix}/auth`, authController.getCurrentUser);
+  router.post(`${apiPrefix}/auth`, authController.signIn);
 
-  router.post('/signout', authController.signOut);
-  router.post('/signup', authController.createUser);
+  router.post(`${apiPrefix}/signout`, authController.signOut);
+  router.post(`${apiPrefix}/signup`, authController.createUser);
 
   // secured routes
   app.use(router.routes());

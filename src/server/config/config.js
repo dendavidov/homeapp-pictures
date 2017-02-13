@@ -7,6 +7,7 @@ const base = {
   app: {
     root: path.normalize(`${__dirname}/../../..`),
     env,
+    apiPrefix: '/api/v1',
   },
 };
 
