@@ -4,9 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
-const getPath = (pathString) => {
-  return path.resolve(`../${pathString}`);
-};
+const getPath = pathString => path.resolve(`../${pathString}`);
 
 const config = {
   entry: getPath('src/client/app.jsx'),

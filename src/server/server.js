@@ -18,9 +18,11 @@ mongoose.connection.on('error', (err) => {
 // 3. load the models
 const modelPath = `${config.app.root}/src/server/models`;
 fs.readdirSync(modelPath).forEach((file) => {
+  /* eslint-disable no-bitwise, global-require, import/no-dynamic-require */
   if (~file.indexOf('js')) {
     require(`${modelPath}/${file}`);
   }
+  /* eslint-enable no-bitwise, global-require, import/no-dynamic-require */
 });
 
 // 4. server

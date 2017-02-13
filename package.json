@@ -7,7 +7,8 @@
     "clean": "cd tools && sh clean.sh",
     "front-server": "cd tools && sh prepare-front.sh",
     "back-server": "cd tools && sh back-server.sh",
-    "dev-server": "cd tools && concurrently --kill-others \"sh prepare-front.sh\" \"sh back-server.sh\""
+    "dev-server": "cd tools && concurrently --kill-others \"sh prepare-front.sh\" \"sh back-server.sh\"",
+    "lint": "eslint -c ./tools/.eslintrc src test ./tools/webpack.config.js --ext .jsx --ext .js"
   },
   "repository": {
     "type": "git",
@@ -48,12 +49,12 @@
     "babel-preset-react": "^6.16.0",
     "concurrently": "^3.3.0",
     "css-loader": "^0.26.1",
-    "eslint": "^3.13.0",
+    "eslint": "^3.15.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-react": "^6.9.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "favicons-webpack-plugin": "0.0.7",
     "file-loader": "^0.10.0",

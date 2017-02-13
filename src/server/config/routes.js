@@ -3,17 +3,17 @@ const config = require('./config');
 
 const authController = require('../controllers/authController');
 
-function* secured(next) {
-  if (this.isAuthenticated()) {
-    yield next;
-  } else {
-    this.status = 401;
-  }
-}
+// function* secured(next) {
+//   if (this.isAuthenticated()) {
+//     yield next;
+//   } else {
+//     this.status = 401;
+//   }
+// }
 
 module.exports = function routes(app) {
   const apiPrefix = config.app.apiPrefix;
-  console.log('apiPrefix', apiPrefix);
+
   // register functions
   const router = new Router();
 
