@@ -24,7 +24,7 @@
     "koa-bodyparser": "^2.3.0",
     "koa-compress": "^1.0.9",
     "koa-passport": "^1.4.0",
-    "koa-response-time": "^1. 0.2",
+    "koa-response-time": "^1.0.2",
     "koa-router": "^5.4.0",
     "lodash": "^4.17.4",
     "log4js": "^1.1.0",
