@@ -26,7 +26,7 @@ fs.readdirSync(modelPath).forEach((file) => {
 });
 
 // 4. server
-const app = module.exports = koa();
+const app = koa();
 app.use(cors());
 require('./config/passport')(passport, config);
 require('./config/koa')(app, config, passport);
@@ -41,3 +41,5 @@ if (!module.parent) {
 }
 
 logger.info(`Environment: ${config.app.env}`);
+
+module.exports = app;

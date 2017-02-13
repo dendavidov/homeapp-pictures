@@ -8,14 +8,13 @@
   ],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+    "assert": true
   },
   "rules": {
     "import/no-extraneous-dependencies": 0
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
   }
 }

@@ -8,6 +8,8 @@
     "front-server": "cd tools && sh prepare-front.sh",
     "back-server": "cd tools && sh back-server.sh",
     "dev-server": "cd tools && concurrently --kill-others \"sh prepare-front.sh\" \"sh back-server.sh\"",
+    "test": "npm run lint && npm run base-test",
+    "base-test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/test-*.js",
     "lint": "eslint -c ./tools/.eslintrc src test ./tools/webpack.config.js --ext .jsx --ext .js"
   },
   "repository": {
@@ -62,12 +64,14 @@
     "koa-static": "^2.0.0",
     "koa-webpack-dev-middleware": "^1.3.0",
     "koa-webpack-hot-middleware": "^1.0.3",
+    "mocha": "^3.2.0",
     "node-sass": "^4.1.1",
     "nodemon": "^1.11.0",
     "resolve-url": "^0.2.1",
     "resolve-url-loader": "^1.6.1",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
+    "supertest": "^3.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0"
   }
