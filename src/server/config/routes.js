@@ -10,25 +10,20 @@ function* secured(next) {
   }
 }
 
-module.exports = function(app, passport) {
+module.exports = function routes(app) {
   // register functions
-  var router = new Router();
+  const router = new Router();
 
-  router.use(function *(next) {
-    this.type = "json";
+  router.use(function* json(next) {
+    this.type = 'json';
     yield next;
   });
 
-  router.get("/", function *() {
-    this.type = "html";
-    yield indexController.index.apply(this);
-  });
+  router.get('/auth', authController.getCurrentUser);
+  router.post('/auth', authController.signIn);
 
-  router.get("/auth", authController.getCurrentUser);
-  router.post("/auth", authController.signIn);
-
-  router.post("/signout", authController.signOut);
-  router.post("/signup", authController.createUser);
+  router.post('/signout', authController.signOut);
+  router.post('/signup', authController.createUser);
 
   // secured routes
   app.use(router.routes());

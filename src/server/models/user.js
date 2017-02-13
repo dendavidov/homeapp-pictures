@@ -20,14 +20,14 @@ const UserSchema = new Schema({
   },
 }, {
   toJSON: {
-    transform: (doc, ret, options) => {
+    transform: (doc, ret) => {
       delete ret.password;
     },
   },
 });
 
 // middlewares:
-UserSchema.pre('save', function (done) {
+UserSchema.pre('save', function save(done) {
   // only hash the password if it has been modified (or is new)
   if (!this.isModified('password')) {
     return done();
@@ -46,7 +46,7 @@ UserSchema.pre('save', function (done) {
 
 // methods
 UserSchema.methods.comparePassword = function* comparePassword(candidatePassword) {
-  return yield bcrypt.compare(candidatePassword, this.password)
+  return yield bcrypt.compare(candidatePassword, this.password);
 };
 
 // statics
@@ -64,4 +64,3 @@ UserSchema.statics.passwordMatches = function* passwordMatches(username, passwor
 };
 
 mongoose.model('User', UserSchema);
-

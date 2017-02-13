@@ -1,9 +1,9 @@
 const passport = require('koa-passport');
 const User = require('mongoose').model('User');
 
-exports.signIn = function* () {
+exports.signIn = function* signIn() {
   const that = this;
-  yield* passport.authenticate('local', function* (err, user) {
+  yield* passport.authenticate('local', function* authenticate(err, user) {
     if (err) {
       throw err;
     }
@@ -16,14 +16,14 @@ exports.signIn = function* () {
   }).call(this);
 };
 
-exports.getCurrentUser = function* () {
+exports.getCurrentUser = function getCurrentUser() {
   if (this.passport.user) {
     this.body = { user: this.passport.user };
   }
   this.status = 200;
 };
 
-exports.createUser = function* () {
+exports.createUser = function* createUser() {
   if (!this.request.body) {
     this.throw('The body is empty', 400);
   }
@@ -50,7 +50,7 @@ exports.createUser = function* () {
   };
 };
 
-exports.signOut = function* () {
+exports.signOut = function signOut() {
   this.logout();
   this.session = null;
   this.status = 204;

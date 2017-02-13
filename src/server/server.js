@@ -30,7 +30,7 @@ require('./config/passport')(passport, config);
 require('./config/koa')(app, config, passport);
 
 // 5. routes
-require("./config/routes")(app, passport);
+require('./config/routes')(app, passport);
 
 // 6. start app
 if (!module.parent) {
