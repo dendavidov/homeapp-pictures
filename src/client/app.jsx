@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import Application from './application/application';
 import AnonymousLayout from './layouts/anonymous';
@@ -11,7 +11,7 @@ import SignUp from './pages/sign-up';
 import IndexPage from './pages/index-page';
 import NotFound from './pages/notfound';
 
-const router = (<Router history={hashHistory}>
+const router = (<Router history={browserHistory} >
   <Route component={Application}>
     <Route path="/auth" component={AnonymousLayout}>
       <Route path="signin" component={SignIn} />

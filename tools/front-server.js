@@ -1,5 +1,6 @@
 const koa = require('koa');
 const serve = require('koa-static');
+const router = require('koa-router')();
 const log4js = require('log4js');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
@@ -18,6 +19,12 @@ app.use(koaWebpackDevMiddleware(compiler, {
 }));
 
 app.use(koaWebpackHotMiddleware(compiler));
+
+router.all('/*', function *() {
+  this.redirect('/');
+});
+
+app.use(router.routes());
 
 app.use(serve('../build'));
 

@@ -9,11 +9,11 @@ class AuthenticatedLayout extends React.Component {
   }
 
   render() {
-    return (
+    return (AuthStore.isLoggedIn()) ? (
       <div className="container">
         {this.props.children}
       </div>
-    );
+    ) : null;
   }
 }
 

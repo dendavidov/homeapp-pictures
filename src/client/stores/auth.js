@@ -14,7 +14,9 @@ const getUrl = url => `http://localhost:3000/api/v1/${url}`;
 
 function parseUser(user) {
   return {
-    id: user.id,
+    /* eslint-disable no-underscore-dangle */
+    id: user._id,
+    /* eslint-enable no-underscore-dangle */
     username: user.username,
   };
 }

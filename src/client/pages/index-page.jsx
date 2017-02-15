@@ -1,10 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
+import AuthStore from '../stores/auth';
+
 function IndexPage() {
+  const user = AuthStore.getUser();
   return (
     <div className="indexpage">
-      <h1>Hello, World!</h1>
+      <h1>Hello, World, { user.username }!</h1>
       <Row>
         <Col md={12}>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,

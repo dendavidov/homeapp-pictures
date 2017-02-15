@@ -34,7 +34,7 @@ class AppNavbar extends React.Component {
       return (
         <Nav>
           <LinkContainer
-            to="auth/signout"
+            to="/auth/signout"
           >
             <NavItem>Sign out</NavItem>
           </LinkContainer>
@@ -44,7 +44,7 @@ class AppNavbar extends React.Component {
     return (
       <Nav>
         <LinkContainer
-          to="auth/signin"
+          to="/auth/signin"
         >
           <NavItem>Sign in</NavItem>
         </LinkContainer>
