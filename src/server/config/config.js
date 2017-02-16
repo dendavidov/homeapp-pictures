@@ -13,7 +13,8 @@ const base = {
 
 const config = {
   app: {
-    port: 3000,
+    port: 3001,
+    keys: ['super-secret-key'],
   },
   mongo: {
     url: 'mongodb://localhost/koareactfullexample_dev',

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const koa = require('koa');
-const cors = require('kcors');
 const passport = require('koa-passport');
 const fs = require('fs');
 
@@ -27,7 +26,6 @@ fs.readdirSync(modelPath).forEach((file) => {
 
 // 4. server
 const app = koa();
-app.use(cors());
 require('./config/passport')(passport, config);
 require('./config/koa')(app, config, passport);
 
