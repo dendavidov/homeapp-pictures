@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+
+import configureStore from './stores/configureStore';
 
 import Application from './application/application';
 import AnonymousLayout from './layouts/anonymous';
@@ -10,6 +13,8 @@ import SignOut from './pages/sign-out';
 import SignUp from './pages/sign-up';
 import IndexPage from './pages/index-page';
 import NotFound from './pages/notfound';
+
+const store = configureStore();
 
 const router = (<Router history={browserHistory} >
   <Route component={Application}>
@@ -25,5 +30,9 @@ const router = (<Router history={browserHistory} >
   </Route>
 </Router>);
 
-ReactDOM.render(router,
-document.getElementById('application'));
+ReactDOM.render(
+  <Provider store={store}>
+    { router }
+  </Provider>,
+  document.getElementById('application'),
+);
