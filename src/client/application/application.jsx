@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Navbar from '../components/navbar';
-import AuthStore from '../stores/auth';
+import UserActions from '../actions/userActions';
 
 import '../sass/main.sass';
 
@@ -14,33 +14,24 @@ class Application extends React.Component {
   }
 
   componentWillMount() {
-    AuthStore.init();
+    UserActions.fetchUser()
+      .then(() => {
+        this.setState({
+          hasLoaded: true,
+        });
+      });
   }
-
-  componentDidMount() {
-    AuthStore.addChangeListener(this.onLoad);
-  }
-
-  componentWillUnmount() {
-    AuthStore.removeChangeListener(this.onLoad);
-  }
-
-  onLoad = () => {
-    AuthStore.removeChangeListener(this.onLoad);
-    this.setState({
-      hasLoaded: true,
-    });
-  };
 
   render() {
-    return (
-      <div>
+    return !this.state.hasLoaded ?
+      (<div>Application is loading</div>) :
+      (<div>
         <Navbar />
         <div className="transition-crop main-container">
           {this.props.children}
         </div>
       </div>
-    );
+      );
   }
 }
 

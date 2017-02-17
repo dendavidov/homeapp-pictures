@@ -1,15 +1,18 @@
 import React from 'react';
-import AuthStore from '../stores/auth';
+import UserActions from '../actions/userActions';
 
 class SignOut extends React.Component {
   componentWillMount() {
-    AuthStore.signOut(() => {
-      this.context.router.replace('/');
-    });
+    UserActions.signOut()
+      .then(() => {
+        this.context.router.replace('/');
+      });
   }
 
   render() {
-    return null;
+    return (
+      <div>Выполняется выход...</div>
+    );
   }
 }
 

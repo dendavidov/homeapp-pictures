@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, FormGroup, FormControl, Button } from 'react-bootstrap';
-import AuthStore from '../stores/auth';
+import UserActions from '../actions/userActions';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -34,13 +34,13 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { username, password, repeatPassword } = this.state;
     if (password === repeatPassword) {
-      AuthStore.signUp(username, password, (err, user) => {
-        if (err || !user) {
-          this.setState({ error: 'Could not Create the User' });
-        } else {
+      UserActions.signUp(username, password)
+        .then(() => {
           this.context.router.replace('/');
-        }
-      });
+        })
+        .catch(() => {
+          this.setState({ error: 'Could not Create the User' });
+        });
     }
   };
 

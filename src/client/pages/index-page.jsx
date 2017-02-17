@@ -1,10 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 
-import AuthStore from '../stores/auth';
-
-function IndexPage() {
-  const user = AuthStore.getUser();
+function IndexPage(props) {
+  const user = props.user;
   return (
     <div className="indexpage">
       <h1>Hello, World, { user.username }!</h1>
@@ -26,10 +25,11 @@ function IndexPage() {
 }
 
 IndexPage.propTypes = {
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.arrayOf(React.PropTypes.node),
-    React.PropTypes.node,
-  ]),
+  user: React.PropTypes.shape(),
 };
 
-export default IndexPage;
+const mapStateToProps = state => ({
+  user: state.user.user,
+});
+
+export default connect(mapStateToProps)(IndexPage);

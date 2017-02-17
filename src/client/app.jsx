@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
-import configureStore from './stores/configureStore';
+import store from './stores/configureStore';
 
 import Application from './application/application';
 import AnonymousLayout from './layouts/anonymous';
@@ -14,10 +14,8 @@ import SignUp from './pages/sign-up';
 import IndexPage from './pages/index-page';
 import NotFound from './pages/notfound';
 
-const store = configureStore();
-
 const router = (<Router history={browserHistory} >
-  <Route component={Application}>
+  <Route component={Application} onEnter={Application.onEnter}>
     <Route path="/auth" component={AnonymousLayout}>
       <Route path="signin" component={SignIn} />
       <Route path="signup" component={SignUp} />

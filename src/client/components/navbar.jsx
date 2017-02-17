@@ -1,36 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import AuthStore from '../stores/auth';
 
 class AppNavbar extends React.Component {
-  static componentWillMount() {
-    AuthStore.init();
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: props.user,
-    };
-  }
-
-  componentDidMount() {
-    AuthStore.addChangeListener(this.onStoreChange);
-  }
-
-  componentWillUnmount() {
-    AuthStore.removeChangeListener(this.onStoreChange);
-  }
-
-  onStoreChange = () => {
-    this.setState({
-      user: AuthStore.getUser(),
-    });
-  };
-
   renderNavLinks = () => {
-    if (this.state.user) {
+    if (this.props.isAuthenticated) {
       return (
         <Nav>
           <LinkContainer
@@ -60,14 +35,15 @@ class AppNavbar extends React.Component {
 }
 
 AppNavbar.propTypes = {
-  user: React.PropTypes.shape({
-    id: React.PropTypes.string,
-    username: React.PropTypes.string,
-  }),
+  isAuthenticated: React.PropTypes.bool.isRequired,
 };
 
 AppNavbar.defaultProps = {
-  user: AuthStore.getUser(),
+  isAuthenticated: false,
 };
 
-export default AppNavbar;
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(AppNavbar);

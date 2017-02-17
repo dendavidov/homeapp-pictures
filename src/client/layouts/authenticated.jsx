@@ -1,15 +1,15 @@
 import React from 'react';
-import AuthStore from '../stores/auth';
+import { connect } from 'react-redux';
 
 class AuthenticatedLayout extends React.Component {
   componentWillMount() {
-    if (!AuthStore.isLoggedIn()) {
+    if (!this.props.isAuthenticated) {
       this.context.router.replace('/auth/signin');
     }
   }
 
   render() {
-    return (AuthStore.isLoggedIn()) ? (
+    return (this.props.isAuthenticated) ? (
       <div className="container">
         {this.props.children}
       </div>
@@ -22,10 +22,15 @@ AuthenticatedLayout.propTypes = {
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
   ]),
+  isAuthenticated: React.PropTypes.bool.isRequired,
 };
 
 AuthenticatedLayout.contextTypes = {
   router: React.PropTypes.shape(),
 };
 
-export default AuthenticatedLayout;
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(AuthenticatedLayout);

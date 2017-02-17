@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Col, FormControl, FormGroup, Button, Row } from 'react-bootstrap';
-import AuthStore from '../stores/auth';
+
+import UserActions from '../actions/userActions';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -29,13 +30,13 @@ class SignIn extends React.Component {
     e.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
-    AuthStore.signIn(username, password, (err, user) => {
-      if (err || !user) {
-        this.setState({ error: true });
-      } else {
+    UserActions.signIn(username, password)
+      .then(() => {
         this.context.router.replace('/');
-      }
-    });
+      })
+      .catch(() => {
+        this.setState({ error: true });
+      });
   };
 
   renderErrorBlock() {
