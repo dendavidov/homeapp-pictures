@@ -1,11 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-function AnonymousLayout(props) {
-  return (
-    <div className="container">
-      {props.children}
-    </div>
-  );
+class AnonymousLayout extends React.Component {
+  componentWillMount() {
+    if (this.props.isAuthenticated) {
+      this.context.router.replace('/');
+    }
+  }
+
+  render() {
+    return (
+      <div className="container">
+        {this.props.children}
+      </div>
+    );
+  }
+
 }
 
 AnonymousLayout.propTypes = {
@@ -13,6 +23,15 @@ AnonymousLayout.propTypes = {
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
   ]),
+  isAuthenticated: React.PropTypes.bool,
 };
 
-export default AnonymousLayout;
+AnonymousLayout.contextTypes = {
+  router: React.PropTypes.shape(),
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(AnonymousLayout);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Navbar from '../components/navbar';
 import UserActions from '../actions/userActions';
@@ -6,24 +7,12 @@ import UserActions from '../actions/userActions';
 import '../sass/main.sass';
 
 class Application extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hasLoaded: false,
-    };
-  }
-
   componentWillMount() {
-    UserActions.fetchUser()
-      .then(() => {
-        this.setState({
-          hasLoaded: true,
-        });
-      });
+    UserActions.fetchUser();
   }
 
   render() {
-    return !this.state.hasLoaded ?
+    return this.props.isLoading ?
       (<div>Application is loading</div>) :
       (<div>
         <Navbar />
@@ -40,6 +29,11 @@ Application.propTypes = {
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node,
   ]),
+  isLoading: React.PropTypes.bool,
 };
 
-export default Application;
+const mapStateToProps = state => ({
+  isLoading: state.user.isLoading,
+});
+
+export default connect(mapStateToProps)(Application);

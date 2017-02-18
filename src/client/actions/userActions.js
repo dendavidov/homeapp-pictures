@@ -72,8 +72,8 @@ const signOut = () => new Promise((resolve, reject) => {
   request.post(getUrl(URLS.SIGN_OUT))
     .set('Accept', 'application/json')
     .set('Content-Type', 'application/json')
-    .end((err, res) => {
-      if (!err && res.body && res.body.user) {
+    .end((err) => {
+      if (!err) {
         resolve(dispatch({
           type: UserConstants.LOGOUT_SUCCESS,
         }));
