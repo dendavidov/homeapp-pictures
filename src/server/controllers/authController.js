@@ -24,8 +24,10 @@ exports.signIn = function* signIn() {
 exports.getCurrentUser = function getCurrentUser() {
   if (this.passport.user) {
     this.body = { user: this.passport.user };
+    this.status = 200;
+  } else {
+    this.status = Utils.http('UNAUTHORIZED').status;
   }
-  this.status = 200;
 };
 
 exports.createUser = function* createUser() {
