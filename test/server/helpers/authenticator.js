@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 exports.CREDENTIALS = { username: 'user', password: 'test-password' };
+exports.CREDENTIALS_WRONG = { username: 'user', password: 'wrong-password' };
+exports.CREDENTIALS_NEW = { username: 'new-user', password: 'test-password' };
 
 exports.loginUrl = '/api/v1/auth';
 

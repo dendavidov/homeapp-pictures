@@ -3,7 +3,7 @@ const koa = require('koa');
 const passport = require('koa-passport');
 const fs = require('fs');
 
-const logger = require('./logger');
+const logger = require('./utils/logger');
 
 // 1. config
 const config = require('./config/config');

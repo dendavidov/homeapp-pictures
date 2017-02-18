@@ -1,6 +1,8 @@
 const passport = require('koa-passport');
 const User = require('mongoose').model('User');
 
+const Utils = require('../utils');
+
 exports.signIn = function* signIn() {
   const that = this;
   yield* passport.authenticate('local', function* authenticate(err, user) {
@@ -8,7 +10,10 @@ exports.signIn = function* signIn() {
       throw err;
     }
     if (user === false) {
-      that.status = 401;
+      that.status = Utils.http('UNAUTHORIZED').status;
+      that.body = {
+        error: Utils.http('UNAUTHORIZED').message,
+      };
     } else {
       yield that.login(user);
       that.body = { user };
@@ -33,6 +38,7 @@ exports.createUser = function* createUser() {
   if (!this.request.body.password) {
     this.throw('Missing password', 400);
   }
+
   try {
     let user = new User({
       username: this.request.body.username,
@@ -41,6 +47,13 @@ exports.createUser = function* createUser() {
     user = yield user.save();
     yield this.login(user);
   } catch (err) {
+    if (err.code === 11000) {
+      this.status = Utils.http('CONFLICT').status;
+      this.body = {
+        error: 'This username already exists',
+      };
+      return;
+    }
     this.throw(err);
   }
 
