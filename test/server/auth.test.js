@@ -11,18 +11,67 @@ const URLS = {
   signOut: '/api/v1/signout',
 };
 
-describe('Sign Up', () => {
+describe('Auth', () => {
   before(co.wrap(function* createUser() {
     yield authHelper.createUser();
   }));
 
-  describe('Sign up new user', () => {
-    it('should return the user information', (done) => {
-      request.post(URLS.signUp)
+  describe('Anonymous Call', () => {
+    it('should return empty body', (done) => {
+      request.get(URLS.auth)
+        .accept('json')
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            done(err);
+            return;
+          }
+          should.not.exist(res.body.user);
+          done();
+        });
+    });
+  });
+
+  describe('Sign in with wrong password', () => {
+    it('should return 401 error', (done) => {
+      request.post(URLS.auth)
+        .accept('json')
+        .set('Content-Type', 'application/json')
+        .send(authHelper.CREDENTIALS_WRONG)
+        .expect(401)
+        .end((err) => {
+          if (err) {
+            done(err);
+            return;
+          }
+          done();
+        });
+    });
+  });
+
+  describe('Sign in with username which doesn\'t exist', () => {
+    it('should return 401 error', (done) => {
+      request.post(URLS.auth)
         .accept('json')
         .set('Content-Type', 'application/json')
         .send(authHelper.CREDENTIALS_NEW)
+        .expect(401)
+        .end((err) => {
+          if (err) {
+            done(err);
+            return;
+          }
+          done();
+        });
+    });
+  });
+
+  describe('Sign in', () => {
+    it('should return the user information', (done) => {
+      request.post(URLS.auth)
         .accept('json')
+        .set('Content-Type', 'application/json')
+        .send(authHelper.CREDENTIALS)
         .expect(200)
         .end((err, res) => {
           if (err) {
@@ -32,14 +81,14 @@ describe('Sign Up', () => {
           should.exists(res.body);
           should.exists(res.body.user);
           should.exists(res.body.user.username);
-          should.equal(res.body.user.username, authHelper.CREDENTIALS_NEW.username);
+          should.equal(res.body.user.username, authHelper.CREDENTIALS.username);
           done();
         });
     });
   });
 
-  describe('Check authentication for new user', () => {
-    it('should return new user information', (done) => {
+  describe('Check authentication for logged in user', () => {
+    it('should return user information', (done) => {
       request.get(URLS.auth)
         .accept('json')
         .set('Content-Type', 'application/json')
@@ -52,46 +101,7 @@ describe('Sign Up', () => {
           should.exists(res.body);
           should.exists(res.body.user);
           should.exists(res.body.user.username);
-          should.equal(res.body.user.username, authHelper.CREDENTIALS_NEW.username);
-          done();
-        });
-    });
-  });
-
-  describe('Sign out new user', () => {
-    it('should return 204', (done) => {
-      request.post(URLS.signOut)
-        .accept('json')
-        .set('Content-Type', 'application/json')
-        .send()
-        .expect(204)
-        .end((err) => {
-          if (err) {
-            done(err);
-            return;
-          }
-          done();
-        });
-    });
-  });
-
-  describe('Sign in new user', () => {
-    it('should return the user information', (done) => {
-      request.post(URLS.auth)
-        .accept('json')
-        .set('Content-Type', 'application/json')
-        .send(authHelper.CREDENTIALS_NEW)
-        .accept('json')
-        .expect(200)
-        .end((err, res) => {
-          if (err) {
-            done(err);
-            return;
-          }
-          should.exists(res.body);
-          should.exists(res.body.user);
-          should.exists(res.body.user.username);
-          should.equal(res.body.user.username, authHelper.CREDENTIALS_NEW.username);
+          should.equal(res.body.user.username, authHelper.CREDENTIALS.username);
           done();
         });
     });
@@ -103,33 +113,15 @@ describe('Sign Up', () => {
         .accept('json')
         .set('Content-Type', 'application/json')
         .send()
-        .expect(204)
-        .end((err) => {
-          if (err) {
-            done(err);
-            return;
-          }
-          done();
-        });
-    });
-  });
-
-  describe('Sign up existed user', () => {
-    it('should return the user information', (done) => {
-      request.post(URLS.signUp)
-        .accept('json')
-        .set('Content-Type', 'application/json')
-        .send(authHelper.CREDENTIALS_NEW)
-        .accept('json')
-        .expect(409)
+        .expect(200)
         .end((err, res) => {
           if (err) {
             done(err);
             return;
           }
           should.exists(res.body);
-          should.exists(res.body.error);
-          should.equal(res.body.error, 'This username already exists');
+          should.exists(res.body.message);
+          should.equal(res.body.message, 'User successfully signed out');
           done();
         });
     });

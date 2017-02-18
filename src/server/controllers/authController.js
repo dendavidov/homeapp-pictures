@@ -66,5 +66,8 @@ exports.createUser = function* createUser() {
 exports.signOut = function signOut() {
   this.logout();
   this.session = null;
-  this.status = 204;
+  this.status = 200;
+  this.body = {
+    message: 'User successfully signed out',
+  };
 };
