@@ -11,7 +11,7 @@ const URLS = {
 
 const getUrl = url => `http://localhost:3000/api/v1/${url}`;
 
-const fetchUser = () => new Promise((resolve, reject) => {
+const fetchUser = () => {
   dispatch({
     type: UserConstants.FETCH_USER_REQUEST,
   });
@@ -20,24 +20,28 @@ const fetchUser = () => new Promise((resolve, reject) => {
     .set('Content-Type', 'application/json')
     .end((err, res) => {
       if (err) {
-        reject(dispatch({
+        dispatch({
           type: UserConstants.FETCH_USER_FAIL,
-          error: err,
-        }));
-      }
-      if (!err && res.body && res.body.user) {
-        resolve(dispatch({
-          type: UserConstants.FETCH_USER_SUCCESS,
-          user: res.body.user,
-        }));
+          data: {
+            error: err.message,
+          },
+        });
         return;
       }
-      resolve(dispatch({
-        type: UserConstants.FETCH_USER_SUCCESS,
-        user: null,
-      }));
+      if (!err && res.body && res.body.user && res.body.user.id) {
+        dispatch({
+          type: UserConstants.FETCH_USER_SUCCESS,
+          data: {
+            user: res.body.user,
+          },
+        });
+        return;
+      }
+      dispatch({
+        type: UserConstants.FETCH_USER_FAIL,
+      });
     });
-});
+};
 
 const signIn = (username, password) => new Promise((resolve, reject) => {
   dispatch({
@@ -52,13 +56,17 @@ const signIn = (username, password) => new Promise((resolve, reject) => {
       if (err) {
         reject(dispatch({
           type: UserConstants.LOGIN_FAIL,
-          error: err,
+          data: {
+            error: err,
+          },
         }));
       }
       if (!err && res.body && res.body.user) {
         resolve(dispatch({
           type: UserConstants.LOGIN_SUCCESS,
-          user: res.body.user,
+          data: {
+            user: res.body.user,
+          },
         }));
       }
     });
@@ -81,7 +89,9 @@ const signOut = () => new Promise((resolve, reject) => {
       }
       reject(dispatch({
         type: UserConstants.LOGOUT_FAIL,
-        error: err,
+        data: {
+          error: err,
+        },
       }));
     });
 });
@@ -96,16 +106,20 @@ const signUp = (username, password) => new Promise((resolve, reject) => {
     .set('Content-Type', 'application/json')
     .send({ username, password })
     .end((err, res) => {
-      if (!err && res.body && res.body.user) {
+      if (!err && res.body && res.body.user && res.body.user.id) {
         resolve(dispatch({
           type: UserConstants.SIGNUP_SUCCESS,
-          user: res.body.user,
+          data: {
+            user: res.body.user,
+          },
         }));
         return;
       }
       reject(dispatch({
         type: UserConstants.SIGNUP_FAIL,
-        error: err,
+        data: {
+          error: err.message,
+        },
       }));
     });
 });

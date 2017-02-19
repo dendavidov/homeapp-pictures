@@ -1,8 +1,9 @@
 import UserConstants from '../constants/user';
 
 const initialState = {
-  isLoading: false,
   isAuthenticated: false,
+  isLoading: false,
+  isLocalLoading: false,
   user: null,
 };
 
@@ -16,34 +17,34 @@ export default function user(state = initialState, action) {
     case UserConstants.FETCH_USER_SUCCESS:
       return {
         ...state,
+        isAuthenticated: Boolean(action.data.user) && Boolean(action.data.user.username),
         isLoading: false,
-        isAuthenticated: Boolean(action.user) && Boolean(action.user.username),
-        user: action.user,
+        user: action.data.user,
       };
     case UserConstants.FETCH_USER_FAIL:
       return {
         ...state,
-        isLoading: false,
         isAuthenticated: false,
+        isLoading: false,
         name: null,
       };
 
     case UserConstants.LOGIN_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isLocalLoading: true,
       };
     case UserConstants.LOGIN_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        isAuthenticated: action.user !== undefined,
-        user: action.user,
+        isAuthenticated: Boolean(action.data.user && action.data.user.id),
+        isLocalLoading: false,
+        user: action.data.user,
       };
     case UserConstants.LOGIN_FAIL:
       return {
         ...state,
-        isLoading: false,
+        isLocalLoading: false,
         isAuthenticated: false,
         name: null,
       };
@@ -51,39 +52,40 @@ export default function user(state = initialState, action) {
     case UserConstants.LOGOUT_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isLocalLoading: true,
       };
     case UserConstants.LOGOUT_SUCCESS:
       return {
         ...state,
-        isLoading: false,
         isAuthenticated: false,
+        isLocalLoading: false,
         name: null,
       };
     case UserConstants.LOGOUT_FAIL:
       return {
         ...state,
-        isLoading: false,
+        error: action.data.error,
+        isLocalLoading: false,
       };
 
     case UserConstants.SIGNUP_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isLocalLoading: true,
       };
     case UserConstants.SIGNUP_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        isAuthenticated: action.user !== undefined,
-        user: action.user,
+        isAuthenticated: Boolean(action.data.user && action.data.user.id),
+        isLocalLoading: false,
+        user: action.data.user,
       };
     case UserConstants.SIGNUP_FAIL:
       return {
         ...state,
-        isLoading: false,
         isAuthenticated: false,
-        name: null,
+        isLocalLoading: false,
+        user: null,
       };
     default:
       return state;

@@ -6,6 +6,7 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: null,
       username: '',
       password: '',
       repeatPassword: '',
@@ -39,7 +40,9 @@ class SignUp extends React.Component {
           this.context.router.replace('/');
         })
         .catch(() => {
-          this.setState({ error: 'Could not Create the User' });
+          this.setState({
+            error: 'User already exists',
+          });
         });
     }
   };

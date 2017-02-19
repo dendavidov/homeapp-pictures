@@ -21,9 +21,12 @@ const UserSchema = new Schema({
 }, {
   toJSON: {
     transform: (doc, ret) => {
-      /* eslint-disable no-param-reassign */
+      /* eslint-disable no-param-reassign, no-underscore-dangle*/
       delete ret.password;
-      /* eslint-enable no-param-reassign */
+      delete ret.__v;
+      delete ret._id;
+      ret.id = doc._id;
+      /* eslint-enable no-param-reassign, no-underscore-dangle*/
     },
   },
 });
