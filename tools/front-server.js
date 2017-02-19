@@ -4,6 +4,7 @@ const proxy = require('koa-proxy');
 const router = require('koa-router')();
 const log4js = require('log4js');
 const webpack = require('webpack');
+const delay = require('koa-delay');
 const webpackConfig = require('./webpack.config.js');
 const koaWebpackDevMiddleware = require('koa-webpack-dev-middleware');
 const koaWebpackHotMiddleware = require('koa-webpack-hot-middleware');
@@ -21,12 +22,14 @@ app.use(koaWebpackDevMiddleware(compiler, {
 
 app.use(koaWebpackHotMiddleware(compiler));
 
+app.use(delay(500, 500));
+
 app.use(proxy({
   host: 'http://localhost:3001',
   match: /^\/api\//,
 }));
 
-router.all('/*', function redirect() {
+router.all(/^[^.]*$/, function redirect() {
   this.redirect('/');
 });
 

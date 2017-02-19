@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Loader from '../components/loader/loader';
 import Navbar from '../components/navbar';
 import UserActions from '../actions/userActions';
 
@@ -13,7 +14,7 @@ class Application extends React.Component {
 
   render() {
     return this.props.isLoading ?
-      (<div>Application is loading</div>) :
+      (<Loader />) :
       (<div>
         <Navbar />
         <div className="transition-crop main-container">

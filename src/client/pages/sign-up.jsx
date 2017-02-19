@@ -6,6 +6,7 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       error: null,
       username: '',
       password: '',
@@ -33,17 +34,25 @@ class SignUp extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({ loading: true });
     const { username, password, repeatPassword } = this.state;
     if (password === repeatPassword) {
       UserActions.signUp(username, password)
         .then(() => {
+          this.setState({ loading: false });
           this.context.router.replace('/');
         })
         .catch(() => {
           this.setState({
+            loading: false,
             error: 'User already exists',
           });
         });
+    } else {
+      this.setState({
+        loading: false,
+        error: 'Passwords don\'t match',
+      });
     }
   };
 
@@ -62,6 +71,7 @@ class SignUp extends React.Component {
                 id="username"
                 type="text"
                 label="Username"
+                disabled={this.state.loading}
                 placeholder="Username"
                 onChange={this.setUsername}
               />
@@ -71,6 +81,7 @@ class SignUp extends React.Component {
                 id="password"
                 type="password"
                 label="Password"
+                disabled={this.state.loading}
                 placeholder="Password"
                 onChange={this.setPassword}
               />
@@ -80,16 +91,18 @@ class SignUp extends React.Component {
                 id="repeatPassword"
                 type="password"
                 label="Repeat Password"
+                disabled={this.state.loading}
                 placeholder="Repeat Password"
                 onChange={this.setRepeatPassword}
               />
             </FormGroup>
             <Button
               type="submit"
+              disabled={this.state.loading}
               bsStyle="success"
               className="pull-right"
             >
-              Sign In
+              { this.state.loading ? 'Loading...' : 'Sign Up' }
             </Button>
             {this.renderErrorBlock()}
           </form>

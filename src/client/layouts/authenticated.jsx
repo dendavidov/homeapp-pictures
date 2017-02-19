@@ -8,6 +8,12 @@ class AuthenticatedLayout extends React.Component {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    if (!newProps.isAuthenticated) {
+      this.context.router.replace('/auth/signin');
+    }
+  }
+
   render() {
     return (this.props.isAuthenticated) ? (
       <div className="container">

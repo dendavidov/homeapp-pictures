@@ -9,6 +9,7 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       error: false,
+      loading: false,
       username: '',
       password: '',
     };
@@ -30,12 +31,19 @@ class SignIn extends React.Component {
     e.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
+    this.setState({ loading: true });
     UserActions.signIn(username, password)
       .then(() => {
+        this.setState({
+          loading: false,
+        });
         this.context.router.replace('/');
       })
       .catch(() => {
-        this.setState({ error: true });
+        this.setState({
+          error: true,
+          loading: false,
+        });
       });
   };
 
@@ -67,6 +75,7 @@ class SignIn extends React.Component {
                   type="text"
                   label="username"
                   placeholder="username"
+                  disabled={this.state.loading}
                   onChange={this.setUsername}
                 />
               </FormGroup>
@@ -76,15 +85,17 @@ class SignIn extends React.Component {
                   type="password"
                   label="password"
                   placeholder="password"
+                  disabled={this.state.loading}
                   onChange={this.setPassword}
                 />
               </FormGroup>
               <Button
                 type="submit"
+                disabled={this.state.loading}
                 bsStyle="success"
                 className="pull-right"
               >
-                Sign In
+                {this.state.loading ? 'Loading...' : 'Sign In'}
               </Button>
               {this.renderErrorBlock()}
             </form>

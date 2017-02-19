@@ -10,9 +10,7 @@ class SignOut extends React.Component {
   }
 
   render() {
-    return (
-      <div>Выполняется выход...</div>
-    );
+    return null;
   }
 }
 
