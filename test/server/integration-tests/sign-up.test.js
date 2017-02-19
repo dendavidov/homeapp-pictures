@@ -8,7 +8,7 @@ const signUp = require('./api/signup');
 const signout = require('./api/signout');
 
 describe('Sign Up', () => {
-  dbHelper.createDatabase();
+  before(dbHelper.createDatabase());
 
   signUp.signUpNewUser(request);
 
@@ -23,6 +23,12 @@ describe('Sign Up', () => {
   signout.signOut(request);
 
   signUp.signUpExistedUser(request);
+
+  signUp.signUpWithEmptyBody(request);
+
+  signUp.signUpWithMissingUsername(request);
+
+  signUp.signUpWithMissingPassword(request);
 
   after((done) => {
     dbHelper.dropDatabase(done);

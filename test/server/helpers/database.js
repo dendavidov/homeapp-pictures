@@ -28,16 +28,11 @@ const dropDatabase = (cb) => {
   }).then(cb);
 };
 
-const createUser = function* createUser() {
-  const user = new User(data.CREDENTIALS);
-  yield user.save();
-};
-
-const createDatabase = () => {
-  before(co.wrap(function* createNewUser() {
-    yield createUser();
-  }));
-};
+const createDatabase = () => co.wrap(
+  function* createUser() {
+    const user = new User(data.CREDENTIALS);
+    yield user.save();
+  });
 
 module.exports = {
   dropDatabase,

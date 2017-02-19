@@ -1,4 +1,4 @@
-const should = require('should');
+const HTTPStatus = require('http-status');
 
 const config = require('../../../../src/server/config/config');
 
@@ -7,20 +7,17 @@ const url = `${apiPrefix}/signout`;
 
 const signOut = (request) => {
   describe('Sign out', () => {
-    it('should return the message "User successfully signed out"', (done) => {
+    it('should return 204', (done) => {
       request.post(url)
         .accept('json')
         .set('Content-Type', 'application/json')
         .send()
-        .expect(200)
-        .end((err, res) => {
+        .expect(HTTPStatus.NO_CONTENT)
+        .end((err) => {
           if (err) {
             done(err);
             return;
           }
-          should.exists(res.body);
-          should.exists(res.body.message);
-          should.equal(res.body.message, 'User successfully signed out');
           done();
         });
     });

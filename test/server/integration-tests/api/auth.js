@@ -1,8 +1,9 @@
+const HTTPStatus = require('http-status');
 const should = require('should');
 
 const data = require('./../../helpers/data');
-
 const config = require('../../../../src/server/config/config');
+
 
 const apiPrefix = config.app.apiPrefix;
 const url = `${apiPrefix}/auth`;
@@ -12,12 +13,15 @@ const anonymousCall = (request) => {
     it('should return 401', (done) => {
       request.get(url)
         .accept('json')
-        .expect(401)
+        .expect(HTTPStatus.UNAUTHORIZED)
         .end((err, res) => {
           if (err) {
             done(err);
             return;
           }
+          should.exists(res.body);
+          should.exists(res.body.error);
+          should.equal(res.body.error, HTTPStatus[HTTPStatus.UNAUTHORIZED]);
           should.not.exist(res.body.user);
           done();
         });
@@ -27,11 +31,11 @@ const anonymousCall = (request) => {
 
 const authenticatedCall = (request, username) => {
   describe('Check authentication for logged in user', () => {
-    it('should return user information', (done) => {
+    it('should return 200 and the user information', (done) => {
       request.get(url)
         .accept('json')
         .set('Content-Type', 'application/json')
-        .expect(200)
+        .expect(HTTPStatus.OK)
         .end((err, res) => {
           if (err) {
             done(err);
@@ -49,17 +53,21 @@ const authenticatedCall = (request, username) => {
 
 const signInWithWrongPassword = (request) => {
   describe('Sign in with wrong password', () => {
-    it('should return 401 error', (done) => {
+    it('should return 401', (done) => {
       request.post(url)
         .accept('json')
         .set('Content-Type', 'application/json')
         .send(data.CREDENTIALS_WRONG)
-        .expect(401)
-        .end((err) => {
+        .expect(HTTPStatus.UNAUTHORIZED)
+        .end((err, res) => {
           if (err) {
             done(err);
             return;
           }
+          should.exists(res.body);
+          should.exists(res.body.error);
+          should.equal(res.body.error, HTTPStatus[HTTPStatus.UNAUTHORIZED]);
+          should.not.exist(res.body.user);
           done();
         });
     });
@@ -68,17 +76,21 @@ const signInWithWrongPassword = (request) => {
 
 const signInWithNotExistedUser = (request) => {
   describe('Sign in with username which doesn\'t exist', () => {
-    it('should return 401 error', (done) => {
+    it('should return 401', (done) => {
       request.post(url)
         .accept('json')
         .set('Content-Type', 'application/json')
         .send(data.CREDENTIALS_NEW)
-        .expect(401)
-        .end((err) => {
+        .expect(HTTPStatus.UNAUTHORIZED)
+        .end((err, res) => {
           if (err) {
             done(err);
             return;
           }
+          should.exists(res.body);
+          should.exists(res.body.error);
+          should.equal(res.body.error, HTTPStatus[HTTPStatus.UNAUTHORIZED]);
+          should.not.exist(res.body.user);
           done();
         });
     });
@@ -87,12 +99,12 @@ const signInWithNotExistedUser = (request) => {
 
 const signIn = (request, credentials) => {
   describe('Sign in', () => {
-    it('should return the user information', (done) => {
+    it('should return 200 and the user\'s information', (done) => {
       request.post(url)
         .accept('json')
         .set('Content-Type', 'application/json')
         .send(credentials)
-        .expect(200)
+        .expect(HTTPStatus.OK)
         .end((err, res) => {
           if (err) {
             done(err);

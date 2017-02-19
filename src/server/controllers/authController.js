@@ -1,7 +1,7 @@
+const HTTPStatus = require('http-status');
 const passport = require('koa-passport');
+const MongoErrors = require('mongo-errors');
 const User = require('mongoose').model('User');
-
-const Utils = require('../utils');
 
 exports.signIn = function* signIn() {
   const that = this;
@@ -10,10 +10,7 @@ exports.signIn = function* signIn() {
       throw err;
     }
     if (user === false) {
-      that.status = Utils.http('UNAUTHORIZED').status;
-      that.body = {
-        error: Utils.http('UNAUTHORIZED').message,
-      };
+      that.throw(HTTPStatus.UNAUTHORIZED);
     } else {
       yield that.login(user);
       that.body = { user };
@@ -24,23 +21,19 @@ exports.signIn = function* signIn() {
 exports.getCurrentUser = function getCurrentUser() {
   if (this.passport.user) {
     this.body = { user: this.passport.user };
-    this.status = 200;
+    this.status = HTTPStatus.OK;
   } else {
-    this.status = Utils.http('UNAUTHORIZED').status;
+    this.throw(HTTPStatus.UNAUTHORIZED);
   }
 };
 
 exports.createUser = function* createUser() {
-  if (!this.request.body) {
-    this.throw('The body is empty', 400);
+  if (!(this.request.body &&
+      this.request.body.username &&
+      this.request.body.password
+  )) {
+    this.throw(HTTPStatus.BAD_REQUEST);
   }
-  if (!this.request.body.username) {
-    this.throw('Missing username', 400);
-  }
-  if (!this.request.body.password) {
-    this.throw('Missing password', 400);
-  }
-
   try {
     let user = new User({
       username: this.request.body.username,
@@ -49,17 +42,14 @@ exports.createUser = function* createUser() {
     user = yield user.save();
     yield this.login(user);
   } catch (err) {
-    if (err.code === 11000) {
-      this.status = Utils.http('CONFLICT').status;
-      this.body = {
-        error: 'This username already exists',
-      };
+    if (err.code === MongoErrors.DuplicateKey) {
+      this.throw(HTTPStatus.CONFLICT);
       return;
     }
     this.throw(err);
   }
 
-  this.status = 200;
+  this.status = HTTPStatus.OK;
   this.body = {
     user: this.passport.user,
   };
@@ -68,8 +58,5 @@ exports.createUser = function* createUser() {
 exports.signOut = function signOut() {
   this.logout();
   this.session = null;
-  this.status = 200;
-  this.body = {
-    message: 'User successfully signed out',
-  };
+  this.status = HTTPStatus.NO_CONTENT;
 };

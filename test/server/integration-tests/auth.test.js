@@ -7,7 +7,7 @@ const auth = require('./api/auth');
 const signout = require('./api/signout');
 
 describe('Auth', () => {
-  dbHelper.createDatabase();
+  before(dbHelper.createDatabase());
 
   auth.anonymousCall(request);
 

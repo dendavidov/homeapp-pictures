@@ -1,6 +1,9 @@
+const HTTPStatus = require('http-status');
+const version = require('../../../package.json').version;
+
 exports.getIndexPage = function getIndexPage() {
-  this.status = 200;
+  this.status = HTTPStatus.OK;
   this.body = {
-    version: '0.0.1',
+    version,
   };
 };
