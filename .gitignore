@@ -1,4 +1,10 @@
-/node_modules/
-/build/
-/.idea
-/npm-debug.log
+.idea/
+node_modules/
+build
+dist
+static
+yarn-error.log
+coverage
+.env
+downloads/*
+!downloads/.geetkeep

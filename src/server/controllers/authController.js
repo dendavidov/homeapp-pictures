@@ -1,62 +1,94 @@
-const HTTPStatus = require('http-status');
-const passport = require('koa-passport');
-const MongoErrors = require('mongo-errors');
-const User = require('mongoose').model('User');
+import HTTPStatus from 'http-status';
+import MongoErrors from 'mongo-errors';
+import mongoose from 'mongoose';
+import passport from 'koa-passport';
 
-exports.signIn = function* signIn() {
-  const that = this;
-  yield* passport.authenticate('local', function* authenticate(err, user) {
-    if (err) {
-      throw err;
-    }
-    if (user === false) {
-      that.throw(HTTPStatus.UNAUTHORIZED);
-    } else {
-      yield that.login(user);
-      that.body = { user };
-    }
-  }).call(this);
-};
+import Config from '../../config';
 
-exports.getCurrentUser = function getCurrentUser() {
-  if (this.passport.user) {
-    this.body = { user: this.passport.user };
-    this.status = HTTPStatus.OK;
-  } else {
-    this.throw(HTTPStatus.UNAUTHORIZED);
+const User = mongoose.model('User');
+
+const signUp = async ctx => {
+  if (!Config.isRegEnabled) {
+    ctx.throw(HTTPStatus.FORBIDDEN);
   }
-};
 
-exports.createUser = function* createUser() {
-  if (!(this.request.body &&
-      this.request.body.username &&
-      this.request.body.password
-  )) {
-    this.throw(HTTPStatus.BAD_REQUEST);
+  if (
+    !(
+      ctx.request.body &&
+      ctx.request.body.username &&
+      ctx.request.body.password
+    )
+  ) {
+    ctx.throw(HTTPStatus.BAD_REQUEST);
+    return;
   }
+
   try {
-    let user = new User({
-      username: this.request.body.username,
-      password: this.request.body.password,
+    const user = new User({
+      username: ctx.request.body.username,
+      password: ctx.request.body.password,
     });
-    user = yield user.save();
-    yield this.login(user);
+    await user.save();
+    await ctx.login(user);
+
+    ctx.body = {
+      success: true,
+      username: ctx.state.user.username,
+    };
   } catch (err) {
     if (err.code === MongoErrors.DuplicateKey) {
-      this.throw(HTTPStatus.CONFLICT);
-      return;
+      ctx.throw(HTTPStatus.CONFLICT);
     }
-    this.throw(err);
+
+    ctx.throw(HTTPStatus.INTERNAL_SERVER_ERROR);
+  }
+};
+
+const signIn = ctx => {
+  if (
+    !(
+      ctx.request.body &&
+      ctx.request.body.username &&
+      ctx.request.body.password
+    )
+  ) {
+    ctx.throw(HTTPStatus.BAD_REQUEST);
   }
 
-  this.status = HTTPStatus.OK;
-  this.body = {
-    user: this.passport.user,
+  return passport.authenticate('local', (err, user) => {
+    if (user === false) {
+      ctx.throw(HTTPStatus.UNAUTHORIZED);
+    }
+    ctx.login(user);
+    ctx.body = {
+      success: true,
+      data: {
+        username: user && user.username,
+      },
+    };
+  })(ctx);
+};
+
+const signOut = ctx => {
+  ctx.logout();
+  ctx.body = {
+    success: true,
   };
 };
 
-exports.signOut = function signOut() {
-  this.logout();
-  this.session = null;
-  this.status = HTTPStatus.NO_CONTENT;
+const getCurrentUser = ctx => (ctx.state.user ? ctx.state.user.username : null);
+
+const checkAuth = (ctx, next) => {
+  if (!ctx.state.user) {
+    ctx.throw(HTTPStatus.UNAUTHORIZED);
+  }
+  return next();
+};
+
+export default {
+  signUp,
+  signIn,
+  signOut,
+  getCurrentUser,
+  checkAuth,
 };

@@ -1,71 +1,63 @@
-const mongoose = require('mongoose');
-const co = require('co');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
-const bcrypt = require('../lib/bcrypt-thunk');
-
-const Schema = mongoose.Schema;
-
-mongoose.Promise = global.Promise;
-
-const UserSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
+const User = new mongoose.Schema(
+  {
+    type: { type: String, default: 'User' },
+    name: { type: String },
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-}, {
-  toJSON: {
-    transform: (doc, ret) => {
-      /* eslint-disable no-param-reassign, no-underscore-dangle*/
-      delete ret.password;
-      delete ret.__v;
-      delete ret._id;
-      ret.id = doc._id;
-      /* eslint-enable no-param-reassign, no-underscore-dangle*/
+  {
+    toJSON: {
+      transform: (doc, ret) => {
+        /* eslint-disable no-param-reassign, no-underscore-dangle */
+        delete ret._id;
+        delete ret.__v;
+        ret.id = doc._id;
+        /* eslint-enable no-param-reassign, no-underscore-dangle */
+      },
     },
-  },
+  }
+);
+
+User.pre('save', function preSave(next) {
+  const user = this;
+
+  if (!user.isModified('password')) {
+    return next();
+  }
+
+  return new Promise((resolve, reject) => {
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) return reject(err);
+      return resolve(salt);
+    });
+  })
+    .then(salt => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        if (err) {
+          throw new Error(err);
+        }
+
+        user.password = hash;
+
+        next(null);
+      });
+    })
+    .catch(next);
 });
 
-// middlewares:
-UserSchema.pre('save', function save(done) {
-  // only hash the password if it has been modified (or is new)
-  if (!this.isModified('password')) {
-    return done();
-  }
-
-  return co.wrap(function* wrap() {
-    try {
-      const salt = yield bcrypt.genSalt();
-      this.password = yield bcrypt.hash(this.password, salt);
-      done();
-    } catch (err) {
-      done(err);
-    }
-  }).call(this).then(done);
-});
-
-// methods
-UserSchema.methods.comparePassword = function* comparePassword(candidatePassword) {
-  return yield bcrypt.compare(candidatePassword, this.password);
+User.methods.validatePassword = function validatePassword(password) {
+  const user = this;
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(isMatch);
+    });
+  });
 };
 
-// statics
-UserSchema.statics.passwordMatches = function* passwordMatches(username, password) {
-  const user = yield this.findOne({ username: username.toLowerCase() }).exec();
-  if (!user) {
-    throw new Error('User not found');
-  }
-
-  if (yield user.comparePassword(password)) {
-    return user;
-  }
-
-  throw new Error('Password does not match');
-};
-
-mongoose.model('User', UserSchema);
+mongoose.model('User', User);
