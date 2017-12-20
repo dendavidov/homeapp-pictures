@@ -9,9 +9,7 @@ import Helmet from '../../components/helmet';
 const MainPage = props => (
   <div>
     <Helmet />
-    <div>
-    { renderRoutes(props.routes)}
-    </div>
+    <div>{renderRoutes(props.routes)}</div>
   </div>
 );
 

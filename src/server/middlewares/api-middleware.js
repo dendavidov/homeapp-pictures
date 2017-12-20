@@ -27,7 +27,6 @@ const apiLayer = app => {
   router.post(`${API_PREFIX}user/sign-in`, authController.signIn);
   router.post(`${API_PREFIX}user/sign-out`, authController.signOut);
 
-
   router.get(`${API_PREFIX}`, apiController.getIndex);
 
   app.use(router.routes());
