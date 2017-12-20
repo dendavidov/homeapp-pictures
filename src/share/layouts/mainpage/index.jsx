@@ -6,10 +6,12 @@ import { renderRoutes } from '../../routes';
 
 import Helmet from '../../components/helmet';
 
+import styles from './mainpage.styl';
+
 const MainPage = props => (
-  <div>
+  <div className={styles.root}>
     <Helmet />
-    <div>{renderRoutes(props.routes)}</div>
+    {renderRoutes(props.routes)}
   </div>
 );
 

@@ -65,7 +65,7 @@ const config = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.styl$/,
         use: ExtractTextPlugin.extract({
           use: [
             {
@@ -84,6 +84,9 @@ const config = {
                 sourceMap: true,
                 plugins: () => [autoprefixer({ browsers: 'last 2 versions' })],
               },
+            },
+            {
+              loader: 'stylus-loader',
             },
           ],
         }),

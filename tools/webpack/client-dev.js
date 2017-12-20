@@ -99,7 +99,7 @@ const config = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.styl/,
         use: ExtractTextPlugin.extract({
           use: [
             {
@@ -116,7 +116,10 @@ const config = {
                 plugins: () => [autoprefixer({ browsers: 'last 2 versions' })],
               },
             },
-            ],
+            {
+              loader: 'stylus-loader',
+            },
+          ],
         }),
       },
       {
