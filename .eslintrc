@@ -1,22 +1,17 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-    "prettier"
-  ],
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import",
-    "jest"
-  ],
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "jsx-a11y", "import", "jest"],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
   "rules": {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js*"]}],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.test.js*", "./tools/**"] }
+    ],
 
     "jest/no-disabled-tests": "error",
     "jest/no-focused-tests": "error",
@@ -24,7 +19,11 @@
     "jest/valid-expect": "error",
 
     "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
     "react/jsx-wrap-multilines": "off",
-    "spaced-comment": "off"
+    "react/jsx-closing-bracket-location": "off",
+
+    "react/no-danger": "off",
+    "jsx-a11y/no-static-element-interactions": "off"
   }
 }
