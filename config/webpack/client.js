@@ -1,18 +1,26 @@
 import path from 'path';
 
 import webpack from 'webpack';
+import AssetsPlugin from 'assets-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
 
+const BUILD_DIR = resolvePath('distr', 'client');
+
 const config = {
-  mode: 'development',
-  target: 'node',
-  entry: { index: [resolvePath('src', 'server', 'index.js')] },
-  output: {
-    path: resolvePath('build', 'server'),
-    filename: 'index.js',
+  mode: 'production',
+  target: 'web',
+  entry: {
+    index: [resolvePath('src', 'client', 'index.jsx')],
   },
-  devtool: 'source-map',
+  output: {
+    path: BUILD_DIR,
+    filename: '[name]-[chunkhash].js',
+    publicPath: '/client/',
+  },
+  devtool: 'hidden-source-map',
   module: {
     rules: [
       {
@@ -29,8 +37,13 @@ const config = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin([BUILD_DIR]),
+    new AssetsPlugin({
+      filename: 'assets.json',
+      path: `${BUILD_DIR}/`,
+    }),
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
+      NODE_ENV: 'production',
     }),
   ],
   resolve: {

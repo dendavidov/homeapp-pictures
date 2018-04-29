@@ -1,15 +1,18 @@
 import path from 'path';
-
 import webpack from 'webpack';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
 
+const BUILD_DIR = resolvePath('distr', 'server');
+
 const config = {
-  mode: 'development',
+  mode: 'production',
   target: 'node',
   entry: { index: [resolvePath('src', 'server', 'index.js')] },
   output: {
-    path: resolvePath('build', 'server'),
+    path: BUILD_DIR,
     filename: 'index.js',
   },
   devtool: 'source-map',
@@ -29,8 +32,9 @@ const config = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin([BUILD_DIR]),
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
+      NODE_ENV: 'production',
     }),
   ],
   resolve: {

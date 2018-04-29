@@ -3,8 +3,10 @@
 # testing
 /coverage
 
-# production
+# build
 /build
+# distr
+/distr
 
 # misc
   .DS_Store

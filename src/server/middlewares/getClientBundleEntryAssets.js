@@ -25,19 +25,19 @@ export default function getClientBundleEntryAssets() {
   // Return the assets json cache if it exists.
   // In development mode we always read the assets json file from disk to avoid
   // any cases where an older version gets cached.
-  if (process.env.BUILD_FLAG_IS_DEV === 'false' && resultCache) {
+  if (process.env.NODE_ENV === 'production' && resultCache) {
     return resultCache;
   }
 
   const assetsFilePath = pathResolve(
     appRootDir.get(),
-    'build/client',
-    `./assets.json`,
+    process.env.NODE_ENV === 'production' ? 'distr/client' : 'build/client',
+    `./assets.json`
   );
 
   if (!fs.existsSync(assetsFilePath)) {
     throw new Error(
-      `We could not find the "${assetsFilePath}" file, which contains a list of the assets of the client bundle.  Please ensure that the client bundle has been built.`,
+      `We could not find the "${assetsFilePath}" file, which contains a list of the assets of the client bundle.  Please ensure that the client bundle has been built.`
     );
   }
 
@@ -46,7 +46,7 @@ export default function getClientBundleEntryAssets() {
   const assetsJSONCache = readAssetsJSONFile();
   if (typeof assetsJSONCache.index === 'undefined') {
     throw new Error(
-      'No asset data found for expected "index" entry chunk of client bundle.',
+      'No asset data found for expected "index" entry chunk of client bundle.'
     );
   }
   resultCache = assetsJSONCache.index;

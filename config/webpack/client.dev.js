@@ -1,4 +1,6 @@
 import path from 'path';
+
+import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
@@ -24,9 +26,10 @@ const config = {
   },
   output: {
     path: BUILD_DIR,
-    filename: 'client.[hash].js',
+    filename: 'client.js',
     publicPath: `http://${host}:${clientDevServerPort}/client/`,
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -46,6 +49,9 @@ const config = {
     new AssetsPlugin({
       filename: 'assets.json',
       path: `${BUILD_DIR}/`,
+    }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
     }),
   ],
   resolve: {
