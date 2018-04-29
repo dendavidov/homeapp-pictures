@@ -4,17 +4,11 @@ import { spawn } from 'child_process';
 
 class HotNodeServer {
   constructor(port, name, compiler, clientCompiler) {
-    console.log('compiler.options.entry', compiler.options.entry);
-    console.log('compiler.options.output.path', compiler.options.output.path);
-
-
     const compiledEntryFile = path.resolve(
       appRootDir.get(),
       compiler.options.output.path,
       `${Object.keys(compiler.options.entry)[0]}.js`,
     );
-
-    console.log('compiledEntryFile', compiledEntryFile);
 
     const startServer = () => {
       if (this.server) {

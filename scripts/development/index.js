@@ -1,25 +1,15 @@
-import http from 'http';
-import openBrowser from 'react-dev-utils/openBrowser';
+import { resolve as pathResolve } from 'path';
 import { choosePort } from 'react-dev-utils/WebpackDevServerUtils';
 import detect from 'detect-port-alt';
 import chokidar from 'chokidar';
-import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
 
-const host = 'localhost';
-const onResponsive = (hostname, port, cb) =>
-  setTimeout(
-    () =>
-      http
-        .get({ hostname, port, path: '/', agent: false }, cb)
-        .on('error', () => onResponsive(hostname, port, cb)),
-    1000
-  );
+const HOST = 'localhost';
+const PORT = 1337;
+const CLIENT_PORT = 7331;
 
-// Prompt the user to select port if it's already taken.
-// Resolves with newly selected port or null if cancelled.
-choosePort(host, 1337)
-  .then(port => detect(7331).then(clientPort => [port, clientPort]))
+choosePort(HOST, PORT)
+  .then(port => detect(CLIENT_PORT).then(clientPort => [port, clientPort]))
   .then(([port, clientPort]) => {
     if (!port || !clientPort) {
       console.error('User cancelled');
@@ -58,8 +48,6 @@ choosePort(host, 1337)
         });
       });
 
-      // Wait until devServer is started to open browser
-      // onResponsive(host, port, () => openBrowser(`http://${host}:${port}`));
     });
 
     // If we receive a kill cmd then we will first try to dispose our listeners.

@@ -9,20 +9,6 @@ const initializeBundle = (name, bundleConfig) => {
     try {
       const webpackConfig = (name === 'client') ? clientConfig : serverConfig;
 
-      // Install the vendor DLL config for the client bundle if required.
-      // if (name === 'client' && usesDevVendorDLL(bundleConfig)) {
-      //   // Install the vendor DLL plugin.
-      //   webpackConfig.plugins.push(
-      //     new webpack.DllReferencePlugin({
-      //       // $FlowFixMe
-      //       manifest: require(pathResolve(
-      //         appRootDir.get(),
-      //         bundleConfig.outputPath,
-      //         `${bundleConfig.devVendorDLL.name}.json`,
-      //       )),
-      //     }),
-      //   );
-      // }
       return webpack(webpackConfig);
     } catch (err) {
       console.log('Webpack config is invalid, please check the console for more information.');
@@ -39,10 +25,6 @@ class HotDevelopment {
     this.hotClientServer = null;
     this.hotNodeServers = [];
 
-    // Update devServerPort to absolute port
-    // TODO: Refactor HotXServer's and their webpack config to
-    // use passed down props internally.
-    // values.clientDevServerPort = clientPort;
     process.env.PORT = port;
     process.env.CLIENT_DEV_PORT = clientPort;
 
@@ -71,7 +53,6 @@ class HotDevelopment {
       .then(clientCompiler => {
         this.hotNodeServers = nodeBundles.map(
           ({ name, createCompiler }) =>
-            // $FlowFixMe
             new HotNodeServer(port, name, createCompiler(), clientCompiler),
         );
       });

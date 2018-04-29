@@ -1,5 +1,4 @@
 import path from 'path';
-
 import AssetsPlugin from 'assets-webpack-plugin';
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
