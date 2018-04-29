@@ -1,17 +1,17 @@
 import webpack from 'webpack';
 
+import logger from '../src/server/logger';
+
 import clientConfig from '../config/webpack/client';
 import serverConfig from '../config/webpack/server';
 
 [clientConfig, serverConfig].forEach(config => {
-  console.log('config', config);
-
   const compiler = webpack(config);
   compiler.run((err, stats) => {
     if (err) {
-      console.error(err.stack || err);
+      logger.error(err.stack || err);
       if (err.details) {
-        console.error(err.details);
+        logger.error(err.details);
       }
       process.exitCode = process.exitCode || 1;
       return;
@@ -21,6 +21,6 @@ import serverConfig from '../config/webpack/server';
       process.exitCode = process.exitCode || 1;
     }
 
-    console.log(stats.toString({ colors: true }));
+    logger.info(stats.toString({ colors: true }));
   });
 });

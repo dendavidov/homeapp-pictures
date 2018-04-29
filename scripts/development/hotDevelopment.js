@@ -4,15 +4,19 @@ import HotClientServer from './hotClientServer';
 import clientConfig from '../../config/webpack/client.dev';
 import serverConfig from '../../config/webpack/server.dev';
 
+import logger from '../../src/server/logger';
+
 const initializeBundle = (name, bundleConfig) => {
   const createCompiler = () => {
     try {
-      const webpackConfig = (name === 'client') ? clientConfig : serverConfig;
+      const webpackConfig = name === 'client' ? clientConfig : serverConfig;
 
       return webpack(webpackConfig);
     } catch (err) {
-      console.log('Webpack config is invalid, please check the console for more information.');
-      console.error(err);
+      logger.info(
+        'Webpack config is invalid, please check the console for more information.'
+      );
+      logger.error(err);
       throw err;
     }
   };
@@ -30,9 +34,7 @@ class HotDevelopment {
 
     const clientBundle = initializeBundle('client');
 
-    const nodeBundles = [
-      initializeBundle('server'),
-    ];
+    const nodeBundles = [initializeBundle('server')];
 
     Promise.resolve(true)
       // Then start the client development server.
@@ -53,7 +55,7 @@ class HotDevelopment {
       .then(clientCompiler => {
         this.hotNodeServers = nodeBundles.map(
           ({ name, createCompiler }) =>
-            new HotNodeServer(port, name, createCompiler(), clientCompiler),
+            new HotNodeServer(port, name, createCompiler(), clientCompiler)
         );
       });
   }

@@ -2,31 +2,38 @@ import path from 'path';
 import appRootDir from 'app-root-dir';
 import { spawn } from 'child_process';
 
+import logger from '../../src/server/logger';
+
 class HotNodeServer {
   constructor(port, name, compiler, clientCompiler) {
     const compiledEntryFile = path.resolve(
       appRootDir.get(),
       compiler.options.output.path,
-      `${Object.keys(compiler.options.entry)[0]}.js`,
+      `${Object.keys(compiler.options.entry)[0]}.js`
     );
 
     const startServer = () => {
       if (this.server) {
         this.server.kill();
         this.server = null;
-        console.log('Restarting server...');
+        logger.info('Restarting server...');
       }
 
       // Start on correct port
       const env = Object.assign(process.env, { PORT: port });
       const newServer = spawn('node', [compiledEntryFile, '--color', { env }]);
 
-      console.log('Server running with latest changes.');
+      logger.info('Server running with latest changes.');
 
-      newServer.stdout.on('data', data => console.log(data.toString().trim()));
+      newServer.stdout.on('data', data => {
+        // eslint-disable-next-line no-console
+        console.log(data.toString().trim());
+      });
       newServer.stderr.on('data', data => {
-        console.log('Error in server execution, check the console for more info.');
-        console.error(data.toString().trim());
+        logger.info(
+          'Error in server execution, check the console for more info.'
+        );
+        logger.error(data.toString().trim());
       });
       this.server = newServer;
     };
@@ -58,12 +65,12 @@ class HotNodeServer {
 
     compiler.plugin('compile', () => {
       this.serverCompiling = true;
-      console.log('Building new bundle...');
+      logger.info('Building new bundle...');
     });
 
     compiler.plugin('done', stats => {
       this.serverCompiling = false;
-      console.log('2. Done compiling');
+      logger.info('2. Done compiling');
 
       if (this.disposing) {
         return;
@@ -71,15 +78,17 @@ class HotNodeServer {
 
       try {
         if (stats.hasErrors()) {
-          console.log('Build failed, check the console for more information.');
-          console.log(stats.toString());
+          logger.info('Build failed, check the console for more information.');
+          logger.info(stats.toString());
           return;
         }
 
         waitForClientThenStartServer();
       } catch (err) {
-        console.log('Failed to start, please check the console for more information.');
-        console.error(err);
+        logger.info(
+          'Failed to start, please check the console for more information.'
+        );
+        logger.error(err);
       }
     });
 

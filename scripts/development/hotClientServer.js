@@ -3,6 +3,8 @@ import createWebpackMiddleware from 'webpack-dev-middleware';
 import createWebpackHotMiddleware from 'webpack-hot-middleware';
 import ListenerManager from './listenerManager';
 
+import logger from '../../src/server/logger';
+
 class HotClientServer {
   constructor(port, compiler) {
     const app = express();
@@ -11,7 +13,7 @@ class HotClientServer {
     const httpPath = compiler.options.output.publicPath;
     if (!httpPath.startsWith('http') && !httpPathRegex.test(httpPath)) {
       throw new Error(
-        'You must supply an absolute public path to a development build of a web target bundle as it will be hosted on a seperate development server to any node target bundles.',
+        'You must supply an absolute public path to a development build of a web target bundle as it will be hosted on a seperate development server to any node target bundles.'
       );
     }
 
@@ -36,15 +38,17 @@ class HotClientServer {
     this.listenerManager = new ListenerManager(listener, 'client');
 
     compiler.plugin('compile', () => {
-      console.log('Building new bundle...');
+      logger.info('Building new bundle...');
     });
 
     compiler.plugin('done', stats => {
       if (stats.hasErrors()) {
-        console.log('Build failed, please check the console for more information.');
-        console.error(stats.toString());
+        logger.info(
+          'Build failed, please check the console for more information.'
+        );
+        logger.error(stats.toString());
       } else {
-        console.log('Running with latest changes.');
+        logger.info('Running with latest changes.');
       }
     });
   }

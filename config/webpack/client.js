@@ -37,7 +37,10 @@ const config = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin([BUILD_DIR]),
+    new CleanWebpackPlugin(['distr/client'], {
+      root: path.resolve(__dirname, '../..'),
+      verbose: true,
+    }),
     new AssetsPlugin({
       filename: 'assets.json',
       path: `${BUILD_DIR}/`,

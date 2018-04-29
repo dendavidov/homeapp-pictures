@@ -4,6 +4,8 @@ import detect from 'detect-port-alt';
 import chokidar from 'chokidar';
 import appRootDir from 'app-root-dir';
 
+import logger from '../../src/server/logger';
+
 const HOST = 'localhost';
 const PORT = 1337;
 const CLIENT_PORT = 7331;
@@ -12,10 +14,11 @@ choosePort(HOST, PORT)
   .then(port => detect(CLIENT_PORT).then(clientPort => [port, clientPort]))
   .then(([port, clientPort]) => {
     if (!port || !clientPort) {
-      console.error('User cancelled');
+      logger.error('User cancelled');
       return;
     }
 
+    // eslint-disable-next-line global-require
     let HotDevelopment = require('./hotDevelopment').default;
     let devServer = new HotDevelopment(port, clientPort);
 
@@ -27,7 +30,7 @@ choosePort(HOST, PORT)
 
     watcher.on('ready', () => {
       watcher.on('change', () => {
-        console.log(
+        logger.info(
           'Project build configuration has changed. Restarting the development devServer...'
         );
         devServer.dispose().then(() => {
@@ -41,13 +44,13 @@ choosePort(HOST, PORT)
           });
 
           // Re-require the development devServer so that all new configs are used.
+          // eslint-disable-next-line global-require
           HotDevelopment = require('./hotDevelopment').default;
 
           // Create a new development devServer.
           devServer = new HotDevelopment(port, clientPort);
         });
       });
-
     });
 
     // If we receive a kill cmd then we will first try to dispose our listeners.

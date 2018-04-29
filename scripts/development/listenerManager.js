@@ -1,3 +1,5 @@
+import logger from '../../src/server/logger';
+
 class ListenerManager {
   constructor(listener, name) {
     this.name = name || 'listener';
@@ -31,10 +33,10 @@ class ListenerManager {
       if (this.listener) {
         this.killAllConnections();
 
-        console.log('Destroyed all existing connections.');
+        logger.info('Destroyed all existing connections.');
 
         this.listener.close(() => {
-          console.log('Closed listener.');
+          logger.info('Closed listener.');
 
           resolve();
         });
