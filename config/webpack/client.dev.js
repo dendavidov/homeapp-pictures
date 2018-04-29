@@ -52,6 +52,9 @@ const config = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: true,
+    }),
   ],
   resolve: {
     modules: ['node_modules'],
