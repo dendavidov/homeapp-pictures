@@ -2,9 +2,9 @@ import path from 'path';
 import webpack from 'webpack';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import stylus from 'stylus';
 
-import postCSSLoaderOptions from './postCSSLoaderOptions';
+import { serverStyleRules } from './rules/styles';
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
@@ -17,6 +17,11 @@ const nodeExternalsFileTypeWhitelist = [
   /\.(mp4|mp3|ogg|swf|webp)$/,
   /\.(css|scss|sass|sss|less)$/,
 ];
+
+const preprocessCss = (css, filename) =>
+  stylus(css)
+    .set('filename', filename)
+    .render();
 
 const config = {
   mode: 'production',
@@ -36,103 +41,21 @@ const config = {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'stage-3', 'react'],
-            plugins: ['transform-class-properties'],
+            plugins: [
+              'transform-class-properties',
+              [
+                'css-modules-transform',
+                {
+                  preprocessCss,
+                  generateScopedName: '[name]__[local]___[hash:base64:5]',
+                  extensions: ['.styl'],
+                },
+              ],
+            ],
           },
         },
       },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          Object.assign(
-            {
-              fallback: {
-                loader: require.resolve('style-loader'),
-                options: {
-                  hmr: false,
-                },
-              },
-              use: [
-                {
-                  loader: require.resolve('css-loader'),
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                    sourceMap: false,
-                  },
-                },
-                {
-                  loader: require.resolve('postcss-loader'),
-                  options: postCSSLoaderOptions,
-                },
-              ],
-            },
-            {}
-          )
-        ),
-        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-      },
-
-      // Supporting for CSS Modules + Stylus
-      {
-        test: /\.nomodule\.styl$/,
-        loader: ExtractTextPlugin.extract(
-          Object.assign(
-            {
-              fallback: require.resolve('style-loader'),
-              use: [
-                {
-                  loader: require.resolve('css-loader'),
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                    sourceMap: false,
-                  },
-                },
-                {
-                  loader: require.resolve('postcss-loader'),
-                  options: postCSSLoaderOptions,
-                },
-                {
-                  loader: require.resolve('stylus-loader'),
-                },
-              ],
-            },
-            {}
-          )
-        ),
-        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-      },
-      {
-        test: /\.styl$/,
-        exclude: /\.nomodule\.styl$/,
-        loader: ExtractTextPlugin.extract(
-          Object.assign(
-            {
-              fallback: require.resolve('style-loader'),
-              use: [
-                {
-                  loader: require.resolve('css-loader'),
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                    sourceMap: true,
-                    modules: true,
-                    localIdentName: '[hash:base64:5]',
-                  },
-                },
-                {
-                  loader: require.resolve('postcss-loader'),
-                  options: postCSSLoaderOptions,
-                },
-                {
-                  loader: require.resolve('stylus-loader'),
-                },
-              ],
-            },
-            {}
-          )
-        ),
-      },
+      ...serverStyleRules,
     ],
   },
   externals: [
@@ -160,10 +83,6 @@ const config = {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].[hash].css',
-      allChunks: true,
     }),
   ],
   resolve: {

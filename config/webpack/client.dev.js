@@ -2,7 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 
-import postCSSLoaderOptions from './postCSSLoaderOptions';
+import { clientDevStyleRules } from './rules/styles';
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
@@ -28,6 +28,7 @@ const config = {
   output: {
     path: BUILD_DIR,
     filename: 'client.js',
+    hotUpdateChunkFilename: '[hash].hot-update.js',
     publicPath: `http://${host}:${clientDevServerPort}/client/`,
   },
   devtool: 'source-map',
@@ -44,69 +45,7 @@ const config = {
           },
         },
       },
-      // "postcss" loader applies autoprefixer to our CSS.
-      // "css" loader resolves paths in CSS and adds assets as dependencies.
-      // "style" loader turns CSS into JS modules that inject <style> tags.
-      // In production, we use a plugin to extract that CSS to a file, but
-      // in development "style" loader enables hot editing of CSS.
-      {
-        test: /\.css$/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: postCSSLoaderOptions,
-          },
-        ],
-      },
-      // Supporting for CSS Modules + Stylus
-      {
-        test: /\.nomodule\.styl$/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: postCSSLoaderOptions,
-          },
-          {
-            loader: require.resolve('stylus-loader'),
-          },
-        ],
-      },
-      {
-        test: /\.styl$/,
-        exclude: /\.nomodule\.styl$/,
-        use: [
-          require.resolve('style-loader'),
-          {
-            loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1,
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            },
-          },
-          {
-            loader: require.resolve('postcss-loader'),
-            options: postCSSLoaderOptions,
-          },
-          {
-            loader: require.resolve('stylus-loader'),
-          },
-        ],
-      },
+      ...clientDevStyleRules,
     ],
   },
   plugins: [

@@ -1,9 +1,14 @@
 import path from 'path';
 import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
+import stylus from 'stylus';
 
-import postCSSLoaderOptions from './postCSSLoaderOptions';
+import { serverStyleRules } from './rules/styles';
+
+const preprocessCss = (css, filename) =>
+  stylus(css)
+    .set('filename', filename)
+    .render();
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
@@ -22,6 +27,7 @@ const config = {
   output: {
     path: resolvePath('build', 'server'),
     filename: 'index.js',
+    hotUpdateChunkFilename: '[hash].hot-update.js',
   },
   devtool: 'source-map',
   module: {
@@ -33,70 +39,21 @@ const config = {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'stage-3', 'react'],
-            plugins: ['transform-class-properties'],
+            plugins: [
+              'transform-class-properties',
+              [
+                'css-modules-transform',
+                {
+                  preprocessCss,
+                  generateScopedName: '[name]__[local]___[hash:base64:5]',
+                  extensions: ['.styl'],
+                },
+              ],
+            ],
           },
         },
       },
-      {
-        test: /\.css/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: require.resolve('css-loader'),
-              options: {
-                importLoaders: 1,
-              },
-            },
-            {
-              loader: require.resolve('postcss-loader'),
-              options: postCSSLoaderOptions,
-            },
-          ],
-        }),
-      },
-      {
-        test: /\.nomodule\.styl$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: require.resolve('css-loader'),
-              options: {
-                importLoaders: 1,
-              },
-            },
-            {
-              loader: require.resolve('postcss-loader'),
-              options: postCSSLoaderOptions,
-            },
-            {
-              loader: require.resolve('stylus-loader'),
-            },
-          ],
-        }),
-      },
-      {
-        test: /\.styl$/,
-        exclude: /\.nomodule\.styl$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: require.resolve('css-loader'),
-              options: {
-                importLoaders: 1,
-                modules: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-              },
-            },
-            {
-              loader: require.resolve('postcss-loader'),
-              options: postCSSLoaderOptions,
-            },
-            {
-              loader: require.resolve('stylus-loader'),
-            },
-          ],
-        }),
-      },
+      ...serverStyleRules,
     ],
   },
   externals: [
@@ -122,9 +79,8 @@ const config = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
-    new ExtractTextPlugin({
-      filename: '[name].[hash].css',
-      allChunks: true,
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: true,
     }),
   ],
   resolve: {
