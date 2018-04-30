@@ -2,6 +2,8 @@ import React from 'react';
 
 import styles from './App.styl';
 
+import './App.css';
+
 class App extends React.Component {
   state = {};
 

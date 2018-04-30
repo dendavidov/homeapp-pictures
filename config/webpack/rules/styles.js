@@ -19,29 +19,8 @@ export const clientDevStyleRules = [
       },
     ],
   },
-  // Supporting for CSS Modules + Stylus
-  {
-    test: /\.nomodule\.styl$/,
-    use: [
-      require.resolve('style-loader'),
-      {
-        loader: require.resolve('css-loader'),
-        options: {
-          importLoaders: 1,
-        },
-      },
-      {
-        loader: require.resolve('postcss-loader'),
-        options: postCSSLoaderOptions,
-      },
-      {
-        loader: require.resolve('stylus-loader'),
-      },
-    ],
-  },
   {
     test: /\.styl$/,
-    exclude: /\.nomodule\.styl$/,
     use: [
       require.resolve('style-loader'),
       {
@@ -95,40 +74,8 @@ export const clientProdStyleRules = [
     ),
     // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
   },
-
-  // Supporting for CSS Modules + Stylus
-  {
-    test: /\.nomodule\.styl$/,
-    loader: ExtractTextPlugin.extract(
-      Object.assign(
-        {
-          fallback: require.resolve('style-loader'),
-          use: [
-            {
-              loader: require.resolve('css-loader'),
-              options: {
-                importLoaders: 1,
-                minimize: true,
-                sourceMap: false,
-              },
-            },
-            {
-              loader: require.resolve('postcss-loader'),
-              options: postCSSLoaderOptions,
-            },
-            {
-              loader: require.resolve('stylus-loader'),
-            },
-          ],
-        },
-        {}
-      )
-    ),
-    // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-  },
   {
     test: /\.styl$/,
-    exclude: /\.nomodule\.styl$/,
     loader: ExtractTextPlugin.extract(
       Object.assign(
         {
