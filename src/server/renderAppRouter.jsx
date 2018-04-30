@@ -23,7 +23,11 @@ export default function renderAppRouter() {
     const appString = renderToString(app);
 
     ctx.body = `<!doctype html>${renderToString(
-      <Html reactAppString={appString} script={clientEntryAssets.js} />
+      <Html
+        reactAppString={appString}
+        script={clientEntryAssets.js}
+        style={clientEntryAssets.css}
+      />
     )}`;
 
     ctx.status = 200;

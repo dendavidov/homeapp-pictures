@@ -3,6 +3,9 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+import postCSSLoaderOptions from './postCSSLoaderOptions';
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
@@ -34,6 +37,99 @@ const config = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: {
+                loader: require.resolve('style-loader'),
+                options: {
+                  hmr: false,
+                },
+              },
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    minimize: true,
+                    sourceMap: false,
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: postCSSLoaderOptions,
+                },
+              ],
+            },
+            {}
+          )
+        ),
+        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+
+      // Supporting for CSS Modules + Stylus
+      {
+        test: /\.nomodule\.styl$/,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    minimize: true,
+                    sourceMap: false,
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: postCSSLoaderOptions,
+                },
+                {
+                  loader: require.resolve('stylus-loader'),
+                },
+              ],
+            },
+            {}
+          )
+        ),
+        // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+      },
+      {
+        test: /\.styl$/,
+        exclude: /\.nomodule\.styl$/,
+        loader: ExtractTextPlugin.extract(
+          Object.assign(
+            {
+              fallback: require.resolve('style-loader'),
+              use: [
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 1,
+                    minimize: true,
+                    sourceMap: true,
+                    modules: true,
+                    localIdentName: '[hash:base64:5]',
+                  },
+                },
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: postCSSLoaderOptions,
+                },
+                {
+                  loader: require.resolve('stylus-loader'),
+                },
+              ],
+            },
+            {}
+          )
+        ),
+      },
     ],
   },
   plugins: [
@@ -47,6 +143,10 @@ const config = {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
+    }),
+    new ExtractTextPlugin({
+      filename: '[name].[hash].css',
+      allChunks: true,
     }),
   ],
   resolve: {

@@ -1,6 +1,9 @@
 import path from 'path';
 import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
+
+import postCSSLoaderOptions from './postCSSLoaderOptions';
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
@@ -34,6 +37,66 @@ const config = {
           },
         },
       },
+      {
+        test: /\.css/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: require.resolve('css-loader'),
+              options: {
+                importLoaders: 1,
+              },
+            },
+            {
+              loader: require.resolve('postcss-loader'),
+              options: postCSSLoaderOptions,
+            },
+          ],
+        }),
+      },
+      {
+        test: /\.nomodule\.styl$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: require.resolve('css-loader'),
+              options: {
+                importLoaders: 1,
+              },
+            },
+            {
+              loader: require.resolve('postcss-loader'),
+              options: postCSSLoaderOptions,
+            },
+            {
+              loader: require.resolve('stylus-loader'),
+            },
+          ],
+        }),
+      },
+      {
+        test: /\.styl$/,
+        exclude: /\.nomodule\.styl$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: require.resolve('css-loader'),
+              options: {
+                importLoaders: 1,
+                modules: true,
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
+            {
+              loader: require.resolve('postcss-loader'),
+              options: postCSSLoaderOptions,
+            },
+            {
+              loader: require.resolve('stylus-loader'),
+            },
+          ],
+        }),
+      },
     ],
   },
   externals: [
@@ -58,6 +121,10 @@ const config = {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+    }),
+    new ExtractTextPlugin({
+      filename: '[name].[hash].css',
+      allChunks: true,
     }),
   ],
   resolve: {
