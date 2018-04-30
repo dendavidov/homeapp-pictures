@@ -17,11 +17,43 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": "TEST",
+      "children": Array [
+        <h1>
+          KOA-REACT-UNIVERSAL-BOILERPLATE
+        </h1>,
+        <img
+          alt="kitten"
+          src="kitten.jpg"
+        />,
+      ],
       "className": "root",
     },
     "ref": null,
-    "rendered": "TEST",
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "KOA-REACT-UNIVERSAL-BOILERPLATE",
+        },
+        "ref": null,
+        "rendered": "KOA-REACT-UNIVERSAL-BOILERPLATE",
+        "type": "h1",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "alt": "kitten",
+          "src": "kitten.jpg",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "img",
+      },
+    ],
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -30,11 +62,43 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": "TEST",
+        "children": Array [
+          <h1>
+            KOA-REACT-UNIVERSAL-BOILERPLATE
+          </h1>,
+          <img
+            alt="kitten"
+            src="kitten.jpg"
+          />,
+        ],
         "className": "root",
       },
       "ref": null,
-      "rendered": "TEST",
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "KOA-REACT-UNIVERSAL-BOILERPLATE",
+          },
+          "ref": null,
+          "rendered": "KOA-REACT-UNIVERSAL-BOILERPLATE",
+          "type": "h1",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "kitten",
+            "src": "kitten.jpg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+      ],
       "type": "div",
     },
   ],

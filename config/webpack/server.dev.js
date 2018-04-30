@@ -13,6 +13,12 @@ const preprocessCss = (css, filename) =>
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const resolvePath = (...args) => path.resolve(ROOT_DIR, ...args);
 
+// The host on which the server should run.
+const host = 'localhost';
+
+// The port on which the client bundle development server should run.
+const clientDevServerPort = 7331;
+
 const nodeExternalsFileTypeWhitelist = [
   /\.(eot|woff|woff2|ttf|otf)$/,
   /\.(svg|png|jpg|jpeg|gif|ico)$/,
@@ -54,6 +60,14 @@ const config = {
         },
       },
       ...serverStyleRules,
+      {
+        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
+        loader: 'file-loader',
+        query: {
+          publicPath: `http://${host}:${clientDevServerPort}/client/`,
+          emitFile: false,
+        },
+      },
     ],
   },
   externals: [

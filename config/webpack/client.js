@@ -38,6 +38,14 @@ const config = {
         },
       },
       ...clientProdStyleRules,
+      {
+        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
+        loader: 'file-loader',
+        query: {
+          publicPath: `/client/`,
+          emitFile: true,
+        },
+      },
     ],
   },
   plugins: [

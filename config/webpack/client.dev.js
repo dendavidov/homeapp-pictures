@@ -46,6 +46,14 @@ const config = {
         },
       },
       ...clientDevStyleRules,
+      {
+        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
+        loader: 'file-loader',
+        query: {
+          publicPath: `http://${host}:${clientDevServerPort}/client/`,
+          emitFile: true,
+        },
+      },
     ],
   },
   plugins: [
