@@ -1,11 +1,11 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
-import getClientBundleEntryAssets from './middlewares/getClientBundleEntryAssets';
+import getClientBundleEntryAssets from './getClientBundleEntryAssets';
 
-import Html from '../client/Html';
+import Html from './Html';
 
-import App from '../client/App';
+import App from '../../shared/components/pages/app/App';
 
 const IGNORED_FILES = ['/favicon.ico'];
 

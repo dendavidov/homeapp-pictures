@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import stylus from 'stylus';
 
 import { serverStyleRules } from './rules/styles';
@@ -90,6 +91,10 @@ const config = {
   ],
 
   plugins: [
+    new CleanWebpackPlugin(['build/server'], {
+      root: path.resolve(__dirname, '../..'),
+      verbose: true,
+    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import kitten from './kitten.jpg';
+import kitten from './assets/kitten.jpg';
 
 import styles from './App.styl';
 

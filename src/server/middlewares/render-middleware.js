@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 
-import renderAppRouter from '../renderAppRouter';
+import renderAppRouter from '../root/renderAppRouter';
 
 const renderLayer = app => {
   const router = new Router();
