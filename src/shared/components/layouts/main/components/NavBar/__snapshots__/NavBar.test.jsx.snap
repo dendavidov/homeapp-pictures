@@ -1,0 +1,1469 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar should match snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NavBar />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <nav
+        className="navbar navbar-expand-lg navbar-dark bg-primary"
+      >
+        <NavLink
+          activeClassName="active"
+          ariaCurrent="true"
+          className="navbar-brand"
+          to="/"
+        >
+          KRUMB-DEMO
+        </NavLink>
+        <button
+          className="navbar-toggler"
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            className="navbar-toggler-icon"
+          />
+        </button>
+        <div
+          className="navbar-collapse collapse"
+        >
+          <ul
+            className="navbar-nav mr-auto"
+          >
+            <li
+              className="nav-item"
+            >
+              <NavLink
+                activeClassName="active"
+                ariaCurrent="true"
+                className="nav-link"
+                to="/"
+              >
+                Home 
+                <span
+                  className="sr-only"
+                >
+                  (current)
+                </span>
+              </NavLink>
+            </li>
+            <li
+              className="nav-item"
+            >
+              <NavLink
+                activeClassName="active"
+                ariaCurrent="true"
+                className="nav-link"
+                to="/todos"
+              >
+                ToDo List
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>,
+      "className": "root",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <NavLink
+            activeClassName="active"
+            ariaCurrent="true"
+            className="navbar-brand"
+            to="/"
+          >
+            KRUMB-DEMO
+          </NavLink>,
+          <button
+            className="navbar-toggler"
+            onClick={[Function]}
+            type="button"
+          >
+            <span
+              className="navbar-toggler-icon"
+            />
+          </button>,
+          <div
+            className="navbar-collapse collapse"
+          >
+            <ul
+              className="navbar-nav mr-auto"
+            >
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/"
+                >
+                  Home 
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </NavLink>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/todos"
+                >
+                  ToDo List
+                </NavLink>
+              </li>
+            </ul>
+          </div>,
+        ],
+        "className": "navbar navbar-expand-lg navbar-dark bg-primary",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "activeClassName": "active",
+            "ariaCurrent": "true",
+            "children": "KRUMB-DEMO",
+            "className": "navbar-brand",
+            "to": "/",
+          },
+          "ref": null,
+          "rendered": "KRUMB-DEMO",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <span
+              className="navbar-toggler-icon"
+            />,
+            "className": "navbar-toggler",
+            "onClick": [Function],
+            "type": "button",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "className": "navbar-toggler-icon",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "span",
+          },
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <ul
+              className="navbar-nav mr-auto"
+            >
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/"
+                >
+                  Home 
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </NavLink>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/todos"
+                >
+                  ToDo List
+                </NavLink>
+              </li>
+            </ul>,
+            "className": "navbar-collapse collapse",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>
+                </li>,
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>
+                </li>,
+              ],
+              "className": "navbar-nav mr-auto",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>,
+                  "className": "nav-item",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "activeClassName": "active",
+                    "ariaCurrent": "true",
+                    "children": Array [
+                      "Home ",
+                      <span
+                        className="sr-only"
+                      >
+                        (current)
+                      </span>,
+                    ],
+                    "className": "nav-link",
+                    "to": "/",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "Home ",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "(current)",
+                        "className": "sr-only",
+                      },
+                      "ref": null,
+                      "rendered": "(current)",
+                      "type": "span",
+                    },
+                  ],
+                  "type": [Function],
+                },
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>,
+                  "className": "nav-item",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "activeClassName": "active",
+                    "ariaCurrent": "true",
+                    "children": "ToDo List",
+                    "className": "nav-link",
+                    "to": "/todos",
+                  },
+                  "ref": null,
+                  "rendered": "ToDo List",
+                  "type": [Function],
+                },
+                "type": "li",
+              },
+            ],
+            "type": "ul",
+          },
+          "type": "div",
+        },
+      ],
+      "type": "nav",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <nav
+          className="navbar navbar-expand-lg navbar-dark bg-primary"
+        >
+          <NavLink
+            activeClassName="active"
+            ariaCurrent="true"
+            className="navbar-brand"
+            to="/"
+          >
+            KRUMB-DEMO
+          </NavLink>
+          <button
+            className="navbar-toggler"
+            onClick={[Function]}
+            type="button"
+          >
+            <span
+              className="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            className="navbar-collapse collapse"
+          >
+            <ul
+              className="navbar-nav mr-auto"
+            >
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/"
+                >
+                  Home 
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </NavLink>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/todos"
+                >
+                  ToDo List
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </nav>,
+        "className": "root",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <NavLink
+              activeClassName="active"
+              ariaCurrent="true"
+              className="navbar-brand"
+              to="/"
+            >
+              KRUMB-DEMO
+            </NavLink>,
+            <button
+              className="navbar-toggler"
+              onClick={[Function]}
+              type="button"
+            >
+              <span
+                className="navbar-toggler-icon"
+              />
+            </button>,
+            <div
+              className="navbar-collapse collapse"
+            >
+              <ul
+                className="navbar-nav mr-auto"
+              >
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>
+                </li>
+              </ul>
+            </div>,
+          ],
+          "className": "navbar navbar-expand-lg navbar-dark bg-primary",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "activeClassName": "active",
+              "ariaCurrent": "true",
+              "children": "KRUMB-DEMO",
+              "className": "navbar-brand",
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "KRUMB-DEMO",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <span
+                className="navbar-toggler-icon"
+              />,
+              "className": "navbar-toggler",
+              "onClick": [Function],
+              "type": "button",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "navbar-toggler-icon",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "span",
+            },
+            "type": "button",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <ul
+                className="navbar-nav mr-auto"
+              >
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>
+                </li>
+              </ul>,
+              "className": "navbar-collapse collapse",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <li
+                    className="nav-item"
+                  >
+                    <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/"
+                    >
+                      Home 
+                      <span
+                        className="sr-only"
+                      >
+                        (current)
+                      </span>
+                    </NavLink>
+                  </li>,
+                  <li
+                    className="nav-item"
+                  >
+                    <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/todos"
+                    >
+                      ToDo List
+                    </NavLink>
+                  </li>,
+                ],
+                "className": "navbar-nav mr-auto",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/"
+                    >
+                      Home 
+                      <span
+                        className="sr-only"
+                      >
+                        (current)
+                      </span>
+                    </NavLink>,
+                    "className": "nav-item",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "activeClassName": "active",
+                      "ariaCurrent": "true",
+                      "children": Array [
+                        "Home ",
+                        <span
+                          className="sr-only"
+                        >
+                          (current)
+                        </span>,
+                      ],
+                      "className": "nav-link",
+                      "to": "/",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "Home ",
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "(current)",
+                          "className": "sr-only",
+                        },
+                        "ref": null,
+                        "rendered": "(current)",
+                        "type": "span",
+                      },
+                    ],
+                    "type": [Function],
+                  },
+                  "type": "li",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/todos"
+                    >
+                      ToDo List
+                    </NavLink>,
+                    "className": "nav-item",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "activeClassName": "active",
+                      "ariaCurrent": "true",
+                      "children": "ToDo List",
+                      "className": "nav-link",
+                      "to": "/todos",
+                    },
+                    "ref": null,
+                    "rendered": "ToDo List",
+                    "type": [Function],
+                  },
+                  "type": "li",
+                },
+              ],
+              "type": "ul",
+            },
+            "type": "div",
+          },
+        ],
+        "type": "nav",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`NavBar should toggle navbar 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <NavBar />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <nav
+        className="navbar navbar-expand-lg navbar-dark bg-primary"
+      >
+        <NavLink
+          activeClassName="active"
+          ariaCurrent="true"
+          className="navbar-brand"
+          to="/"
+        >
+          KRUMB-DEMO
+        </NavLink>
+        <button
+          className="navbar-toggler"
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            className="navbar-toggler-icon"
+          />
+        </button>
+        <div
+          className="navbar-collapse collapse show"
+        >
+          <ul
+            className="navbar-nav mr-auto"
+          >
+            <li
+              className="nav-item"
+            >
+              <NavLink
+                activeClassName="active"
+                ariaCurrent="true"
+                className="nav-link"
+                to="/"
+              >
+                Home 
+                <span
+                  className="sr-only"
+                >
+                  (current)
+                </span>
+              </NavLink>
+            </li>
+            <li
+              className="nav-item"
+            >
+              <NavLink
+                activeClassName="active"
+                ariaCurrent="true"
+                className="nav-link"
+                to="/todos"
+              >
+                ToDo List
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>,
+      "className": "root",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <NavLink
+            activeClassName="active"
+            ariaCurrent="true"
+            className="navbar-brand"
+            to="/"
+          >
+            KRUMB-DEMO
+          </NavLink>,
+          <button
+            className="navbar-toggler"
+            onClick={[Function]}
+            type="button"
+          >
+            <span
+              className="navbar-toggler-icon"
+            />
+          </button>,
+          <div
+            className="navbar-collapse collapse show"
+          >
+            <ul
+              className="navbar-nav mr-auto"
+            >
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/"
+                >
+                  Home 
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </NavLink>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/todos"
+                >
+                  ToDo List
+                </NavLink>
+              </li>
+            </ul>
+          </div>,
+        ],
+        "className": "navbar navbar-expand-lg navbar-dark bg-primary",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "activeClassName": "active",
+            "ariaCurrent": "true",
+            "children": "KRUMB-DEMO",
+            "className": "navbar-brand",
+            "to": "/",
+          },
+          "ref": null,
+          "rendered": "KRUMB-DEMO",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <span
+              className="navbar-toggler-icon"
+            />,
+            "className": "navbar-toggler",
+            "onClick": [Function],
+            "type": "button",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "className": "navbar-toggler-icon",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "span",
+          },
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <ul
+              className="navbar-nav mr-auto"
+            >
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/"
+                >
+                  Home 
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </NavLink>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/todos"
+                >
+                  ToDo List
+                </NavLink>
+              </li>
+            </ul>,
+            "className": "navbar-collapse collapse show",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>
+                </li>,
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>
+                </li>,
+              ],
+              "className": "navbar-nav mr-auto",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>,
+                  "className": "nav-item",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "activeClassName": "active",
+                    "ariaCurrent": "true",
+                    "children": Array [
+                      "Home ",
+                      <span
+                        className="sr-only"
+                      >
+                        (current)
+                      </span>,
+                    ],
+                    "className": "nav-link",
+                    "to": "/",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    "Home ",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "(current)",
+                        "className": "sr-only",
+                      },
+                      "ref": null,
+                      "rendered": "(current)",
+                      "type": "span",
+                    },
+                  ],
+                  "type": [Function],
+                },
+                "type": "li",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>,
+                  "className": "nav-item",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "activeClassName": "active",
+                    "ariaCurrent": "true",
+                    "children": "ToDo List",
+                    "className": "nav-link",
+                    "to": "/todos",
+                  },
+                  "ref": null,
+                  "rendered": "ToDo List",
+                  "type": [Function],
+                },
+                "type": "li",
+              },
+            ],
+            "type": "ul",
+          },
+          "type": "div",
+        },
+      ],
+      "type": "nav",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <nav
+          className="navbar navbar-expand-lg navbar-dark bg-primary"
+        >
+          <NavLink
+            activeClassName="active"
+            ariaCurrent="true"
+            className="navbar-brand"
+            to="/"
+          >
+            KRUMB-DEMO
+          </NavLink>
+          <button
+            className="navbar-toggler"
+            onClick={[Function]}
+            type="button"
+          >
+            <span
+              className="navbar-toggler-icon"
+            />
+          </button>
+          <div
+            className="navbar-collapse collapse show"
+          >
+            <ul
+              className="navbar-nav mr-auto"
+            >
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/"
+                >
+                  Home 
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </NavLink>
+              </li>
+              <li
+                className="nav-item"
+              >
+                <NavLink
+                  activeClassName="active"
+                  ariaCurrent="true"
+                  className="nav-link"
+                  to="/todos"
+                >
+                  ToDo List
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </nav>,
+        "className": "root",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <NavLink
+              activeClassName="active"
+              ariaCurrent="true"
+              className="navbar-brand"
+              to="/"
+            >
+              KRUMB-DEMO
+            </NavLink>,
+            <button
+              className="navbar-toggler"
+              onClick={[Function]}
+              type="button"
+            >
+              <span
+                className="navbar-toggler-icon"
+              />
+            </button>,
+            <div
+              className="navbar-collapse collapse show"
+            >
+              <ul
+                className="navbar-nav mr-auto"
+              >
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>
+                </li>
+              </ul>
+            </div>,
+          ],
+          "className": "navbar navbar-expand-lg navbar-dark bg-primary",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "activeClassName": "active",
+              "ariaCurrent": "true",
+              "children": "KRUMB-DEMO",
+              "className": "navbar-brand",
+              "to": "/",
+            },
+            "ref": null,
+            "rendered": "KRUMB-DEMO",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <span
+                className="navbar-toggler-icon"
+              />,
+              "className": "navbar-toggler",
+              "onClick": [Function],
+              "type": "button",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "navbar-toggler-icon",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "span",
+            },
+            "type": "button",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <ul
+                className="navbar-nav mr-auto"
+              >
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/"
+                  >
+                    Home 
+                    <span
+                      className="sr-only"
+                    >
+                      (current)
+                    </span>
+                  </NavLink>
+                </li>
+                <li
+                  className="nav-item"
+                >
+                  <NavLink
+                    activeClassName="active"
+                    ariaCurrent="true"
+                    className="nav-link"
+                    to="/todos"
+                  >
+                    ToDo List
+                  </NavLink>
+                </li>
+              </ul>,
+              "className": "navbar-collapse collapse show",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <li
+                    className="nav-item"
+                  >
+                    <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/"
+                    >
+                      Home 
+                      <span
+                        className="sr-only"
+                      >
+                        (current)
+                      </span>
+                    </NavLink>
+                  </li>,
+                  <li
+                    className="nav-item"
+                  >
+                    <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/todos"
+                    >
+                      ToDo List
+                    </NavLink>
+                  </li>,
+                ],
+                "className": "navbar-nav mr-auto",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/"
+                    >
+                      Home 
+                      <span
+                        className="sr-only"
+                      >
+                        (current)
+                      </span>
+                    </NavLink>,
+                    "className": "nav-item",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "activeClassName": "active",
+                      "ariaCurrent": "true",
+                      "children": Array [
+                        "Home ",
+                        <span
+                          className="sr-only"
+                        >
+                          (current)
+                        </span>,
+                      ],
+                      "className": "nav-link",
+                      "to": "/",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      "Home ",
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "(current)",
+                          "className": "sr-only",
+                        },
+                        "ref": null,
+                        "rendered": "(current)",
+                        "type": "span",
+                      },
+                    ],
+                    "type": [Function],
+                  },
+                  "type": "li",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <NavLink
+                      activeClassName="active"
+                      ariaCurrent="true"
+                      className="nav-link"
+                      to="/todos"
+                    >
+                      ToDo List
+                    </NavLink>,
+                    "className": "nav-item",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "activeClassName": "active",
+                      "ariaCurrent": "true",
+                      "children": "ToDo List",
+                      "className": "nav-link",
+                      "to": "/todos",
+                    },
+                    "ref": null,
+                    "rendered": "ToDo List",
+                    "type": [Function],
+                  },
+                  "type": "li",
+                },
+              ],
+              "type": "ul",
+            },
+            "type": "div",
+          },
+        ],
+        "type": "nav",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainLayout should match snapshot 1`] = `
+"<div className=\\"root\\">
+  <NavBar />
+  <div className=\\"content\\">
+    test
+  </div>
+</div>"
+`;
