@@ -7,6 +7,17 @@ const rootUser = {
   type: 'superadmin',
 };
 
+const todos = [
+  {
+    title: 'Buy milk',
+    isDone: true,
+  },
+  {
+    title: 'Buy tea',
+    isDone: false,
+  },
+];
+
 async function run() {
   await mongoose.connection.dropDatabase(() => {
     logger.info('Database dropped');
@@ -15,6 +26,10 @@ async function run() {
   const User = mongoose.model('User');
   await User.create(rootUser);
   logger.info('Root user is created');
+
+  const ToDoItem = mongoose.model('ToDoItem');
+  await ToDoItem.create(todos);
+  logger.info('ToDoItems are created');
 }
 
 run()
