@@ -1,3 +1,5 @@
+import loremIpsum from 'lorem-ipsum';
+
 import mongoose from '../../src/server/dbInit';
 import logger from '../../src/server/logger';
 
@@ -7,16 +9,21 @@ const rootUser = {
   type: 'superadmin',
 };
 
-const todos = [
-  {
-    title: 'Buy milk',
-    isDone: true,
-  },
-  {
-    title: 'Buy tea',
-    isDone: false,
-  },
-];
+const getTodos = length => {
+  const result = [];
+  for (let i = 0; i < length; i += 1) {
+    result.push({
+      title: loremIpsum({
+        count: 1,
+        sentenceLowerBound: 2,
+        sentenceUpperBound: 4,
+      }),
+      isDone: true,
+    });
+  }
+
+  return result;
+};
 
 async function run() {
   await mongoose.connection.dropDatabase(() => {
@@ -28,7 +35,7 @@ async function run() {
   logger.info('Root user is created');
 
   const ToDoItem = mongoose.model('ToDoItem');
-  await ToDoItem.create(todos);
+  await ToDoItem.create(getTodos(100));
   logger.info('ToDoItems are created');
 }
 

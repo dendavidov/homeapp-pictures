@@ -7,7 +7,12 @@ import logger from './logger';
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(Config.mongo.url);
+const options = {
+  reconnectTries: Number.MAX_VALUE,
+  reconnectInterval: 500,
+};
+
+mongoose.connect(Config.mongo.url, options);
 mongoose.connection.on('error', err => {
   logger.error(err);
 });
@@ -17,22 +22,15 @@ mongoose.connection.on('connected', () => {
 });
 
 mongoose.connection.once('open', () => {
-  logger.info('connection open');
+  logger.info('Connection open');
 });
 
 mongoose.connection.on('reconnected', () => {
-  logger.info('reconnected');
+  logger.info('Reconnected');
 });
 
 mongoose.connection.on('disconnected', () => {
-  logger.info('disconnected');
-  mongoose.connect(Config.mongo.url, {
-    server: {
-      auto_reconnect: true,
-      socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 },
-    },
-    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-  });
+  logger.info('Disconnected');
 });
 
 export default mongoose;
