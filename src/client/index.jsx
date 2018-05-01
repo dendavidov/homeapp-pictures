@@ -39,4 +39,4 @@ const initialize = () => {
   });
 };
 
-initialize();
+window.addEventListener('DOMContentLoaded', initialize);

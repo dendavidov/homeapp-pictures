@@ -16,8 +16,8 @@ export const getTodos = length => {
     result.push({
       title: loremIpsum({
         count: 1,
-        sentenceLowerBound: 2,
-        sentenceUpperBound: 4,
+        sentenceLowerBound: 8,
+        sentenceUpperBound: 15,
       }),
       isDone: true,
     });

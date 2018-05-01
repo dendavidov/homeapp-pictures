@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import MainLayout from './components/layouts/main';
 
-import Home from './components/pages/home/Home';
+import Home from './components/pages/home';
+import Todos from './components/pages/todos';
 import NotFoundPage from './components/pages/not-found-page/NotFoundPage';
 
 export const renderRoutes = routes => (
@@ -37,13 +38,13 @@ const routes = () => [
         exact: true,
         key: 'home',
       },
-      //
-      // {
-      //   path: '/todos',
-      //   component: Home,
-      //   exact: true,
-      //   key: 'home',
-      // },
+
+      {
+        path: '/todos',
+        component: Todos,
+        exact: true,
+        key: 'todos',
+      },
       {
         component: NotFoundPage,
         status: 404,
