@@ -2,11 +2,9 @@ import React from 'react';
 
 import kitten from './assets/kitten.jpg';
 
-import styles from './App.styl';
+import styles from './Home.styl';
 
-import './App.css';
-
-class App extends React.Component {
+class Home extends React.Component {
   state = {};
 
   render() {
@@ -19,4 +17,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Home;

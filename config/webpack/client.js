@@ -15,6 +15,7 @@ const BUILD_DIR = resolvePath('distr', 'client');
 const config = {
   mode: 'production',
   target: 'web',
+  context: __dirname,
   entry: {
     index: [resolvePath('src', 'client', 'index.jsx')],
   },

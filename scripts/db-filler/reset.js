@@ -9,7 +9,8 @@ const rootUser = {
   type: 'superadmin',
 };
 
-const getTodos = length => {
+// eslint-disable-next-line import/prefer-default-export
+export const getTodos = length => {
   const result = [];
   for (let i = 0; i < length; i += 1) {
     result.push({
