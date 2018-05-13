@@ -91,6 +91,7 @@ const config = {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
+      SERVER: 'true',
     }),
   ],
   resolve: {

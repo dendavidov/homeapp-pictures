@@ -52,9 +52,8 @@ export default function renderAppRouter() {
         </AsyncComponentProvider>
       );
 
-      const appString = renderToString(app);
-
       asyncBootstrapper(app).then(() => {
+        const appString = renderToString(app);
         ctx.body = `<!doctype html>${renderToString(
           <Html
             reactAppString={appString}

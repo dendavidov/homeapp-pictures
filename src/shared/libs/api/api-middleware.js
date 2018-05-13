@@ -34,9 +34,12 @@ const apiMiddleware = ({ dispatch, getState }) => next => action => {
     },
   });
 
+  const server =
+    process.env.SERVER === 'true' ? `http://localhost:${process.env.PORT}` : '';
+
   return axios({
     method,
-    url: urlPostfix ? `${url}/${urlPostfix}` : url,
+    url: urlPostfix ? `${server}${url}/${urlPostfix}` : `${server}${url}`,
     data: body,
     headers: { ...headers },
     ...axiosParams,

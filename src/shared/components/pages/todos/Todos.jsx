@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
+import { withJob } from 'react-jobs';
+
+import LoadingComponent from '../../../components/common/loading-component/LoadingComponent';
+import ErrorComponent from '../../../components/common/error-component/ErrorComponent';
 
 import { fetchTodos } from '../../../redux/todos';
 
-import styles from './Todos.styl';
 import DataStatusProcessor from '../../common/data-status-processor/DataStatusProcessor';
+
+import styles from './Todos.styl';
 
 class Todos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-
-  componentDidMount() {
-    this.props.fetchTodos();
   }
 
   get renderedTodos() {
@@ -65,8 +66,15 @@ const mapActionsToProps = dispatch =>
   );
 
 Todos.propTypes = {
-  fetchTodos: PropTypes.func.isRequired,
   todos: PropTypes.shape().isRequired,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(Todos);
+export default compose(
+  connect(mapStateToProps, mapActionsToProps),
+  withJob({
+    work: props => props.fetchTodos(),
+    LoadingComponent,
+    ErrorComponent,
+    // serverMode: 'defer',
+  })
+)(Todos);

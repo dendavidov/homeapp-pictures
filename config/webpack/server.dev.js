@@ -97,6 +97,7 @@ const config = {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+      SERVER: 'true',
     }),
     new webpack.HotModuleReplacementPlugin({
       multiStep: true,
