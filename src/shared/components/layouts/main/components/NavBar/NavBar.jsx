@@ -23,7 +23,7 @@ class NavBar extends React.Component {
       <div className={styles.root}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <NavLink className="navbar-brand" to="/">
-            KRUMB-DEMO
+            PICTURESQUE
           </NavLink>
           <button
             className="navbar-toggler"
@@ -41,11 +41,6 @@ class NavBar extends React.Component {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">
                   Home <span className="sr-only">(current)</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/todos">
-                  ToDo List
                 </NavLink>
               </li>
             </ul>

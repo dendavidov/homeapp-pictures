@@ -4,9 +4,11 @@ envConfig();
 
 const config = {
   apiPrefix: '/api/v1/',
-  token: process.env.SESSION_TOKEN || 'default-token-key',
-  mongo: {
-    url: process.env.DB_URL,
+  mysql: {
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
   },
   isRegEnabled: true,
 };

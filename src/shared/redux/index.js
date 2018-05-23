@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import todos from './todos';
+import photoLabels from './photoLabels';
 
 export default combineReducers({
-  todos,
+  photoLabels,
 });

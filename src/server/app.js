@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import './dbInit';
+import './mysqlInit';
 
 import middlewares from './middlewares';
 
