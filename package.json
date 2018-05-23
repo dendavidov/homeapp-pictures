@@ -1,8 +1,7 @@
 {
-  "name": "koa-react-universal-mongo-boilerplate",
+  "name": "homeless-picturesque",
   "version": "0.1.0",
-  "main": "index.js",
-  "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "babel-node scripts/build",
     "start": "cross-env NODE_ENV=production node distr/server",
